@@ -1,6 +1,4 @@
-import { BlurTargetView } from 'expo-blur';
 import { Tabs } from 'expo-router';
-import { useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppTabBar } from '@/components/navigation/AppTabBar';
@@ -8,17 +6,12 @@ import { useShowTabBar } from '@/hooks/use-show-tab-bar';
 
 export default function MainLayout() {
   const showTabBar = useShowTabBar();
-  const blurTargetRef = useRef<View>(null);
 
   return (
-    <BlurTargetView ref={blurTargetRef} style={styles.container}>
+    <View style={styles.container}>
       <Tabs
         tabBar={(props) => (
-          <AppTabBar
-            {...props}
-            blurTargetRef={blurTargetRef}
-            visible={showTabBar}
-          />
+          <AppTabBar {...props} visible={showTabBar} />
         )}
         screenOptions={{
           headerShown: false,
@@ -29,7 +22,7 @@ export default function MainLayout() {
         <Tabs.Screen name="settings" />
         <Tabs.Screen name="(scan)" />
       </Tabs>
-    </BlurTargetView>
+    </View>
   );
 }
 

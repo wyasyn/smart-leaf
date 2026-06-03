@@ -1,6 +1,6 @@
 import { BlurView } from 'expo-blur';
-import type { ReactNode, RefObject } from 'react';
-import { Platform, StyleSheet, View, type View as RNView, type ViewProps } from 'react-native';
+import type { ReactNode } from 'react';
+import { Platform, StyleSheet, View, type ViewProps } from 'react-native';
 
 import {
   colors,
@@ -10,21 +10,19 @@ import {
 } from '@/constants/navigation';
 
 type TabPillProps = ViewProps & {
-  blurTargetRef?: RefObject<RNView | null>;
+  children: ReactNode;
 };
 
-export function TabPill({ blurTargetRef, style, children, ...props }: TabPillProps) {
+export function TabPill({ style, children, ...props }: TabPillProps) {
   return (
     <View style={[styles.pill, style]} {...props}>
-      <BlurView
-        blurTarget={Platform.OS === 'android' ? blurTargetRef : undefined}
-        intensity={TAB_PILL_BLUR_INTENSITY}
-        tint="light"
-        blurMethod={
-          Platform.OS === 'android' ? 'dimezisBlurViewSdk31Plus' : undefined
-        }
-        style={StyleSheet.absoluteFill}
-      />
+      {Platform.OS === 'ios' ? (
+        <BlurView
+          intensity={TAB_PILL_BLUR_INTENSITY}
+          tint="light"
+          style={StyleSheet.absoluteFill}
+        />
+      ) : null}
       <View style={styles.tintOverlay} pointerEvents="none" />
       <View style={styles.content}>{children}</View>
     </View>

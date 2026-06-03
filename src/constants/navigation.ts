@@ -9,7 +9,7 @@ export const TAB_PILL_BLUR_INTENSITY = 40;
 export const TAB_BAR_BOTTOM_GAP = 8;
 export const SCAN_CONTROLS_GAP = 16;
 /** ~15% opacity frosted pill (reference mockup). */
-export const TAB_PILL_OPACITY = 0.25;
+export const TAB_PILL_OPACITY = 0.75;
 
 export function tabBarBottomPadding(safeAreaBottom: number): number {
   return safeAreaBottom + TAB_BAR_BOTTOM_GAP;
@@ -26,6 +26,6 @@ export const colors = {
   screenBackground: '#F5F7F6',
   textPrimary: '#111827',
   textSecondary: '#6B7280',
-  shadow: 'rgba(0, 0, 0, 0.15)',
+  shadow: 'rgba(0, 0, 0, 0.25)',
  
 };

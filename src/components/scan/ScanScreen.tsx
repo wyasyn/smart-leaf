@@ -1,16 +1,16 @@
 import { CameraView } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import { useFocusEffect, useRouter } from 'expo-router';
-import { useCallback, useRef } from 'react';
+import { useFocusEffect, useNavigation, useRouter } from 'expo-router';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Platform, StyleSheet, Text, View } from 'react-native';
 
 import { useSmartLeafModel } from '@/ml/SmartLeafModelProvider';
 import { runDiagnosis } from '@/ml/inference';
-import { useSettingsStore } from '@/stores/settings-store';
 import {
   useActiveScanImage,
   useScanStore,
 } from '@/stores/scan-store';
+import { useSettingsStore } from '@/stores/settings-store';
 
 import { ScanCameraControls } from './ScanCameraControls';
 import { ScanCameraView } from './ScanCameraView';
@@ -19,8 +19,10 @@ import { ScanPreviewView } from './ScanPreviewView';
 
 export function ScanScreen() {
   const router = useRouter();
+  const navigation = useNavigation();
   const cameraRef = useRef<CameraView>(null);
   const navigatingRef = useRef(false);
+  const [cameraKey, setCameraKey] = useState(0);
 
   const phase = useScanStore((s) => s.phase);
   const status = useScanStore((s) => s.status);
@@ -38,15 +40,32 @@ export function ScanScreen() {
   const { model, state: modelState } = useSmartLeafModel();
   const confThresholdOverride = useSettingsStore((s) => s.confThresholdOverride);
 
+  // Reset scan state when leaving the scan tab, not when pushing stack screens.
+  useEffect(() => {
+    const tabNav = navigation.getParent();
+    if (!tabNav) return;
+
+    const unsubFocus = tabNav.addListener('focus', () => {
+      setCameraKey((key) => key + 1);
+    });
+    const unsubBlur = tabNav.addListener('blur', () => {
+      if (!navigatingRef.current) {
+        reset();
+      }
+    });
+
+    return () => {
+      unsubFocus();
+      unsubBlur();
+    };
+  }, [navigation, reset]);
+
   useFocusEffect(
     useCallback(() => {
       return () => {
-        if (!navigatingRef.current) {
-          reset();
-        }
         navigatingRef.current = false;
       };
-    }, [reset]),
+    }, []),
   );
 
   const handleCapture = async () => {
@@ -99,7 +118,9 @@ export function ScanScreen() {
 
   return (
     <View style={styles.container}>
-      {showCamera ? <ScanCameraView cameraRef={cameraRef} /> : null}
+      {showCamera ? (
+        <ScanCameraView key={cameraKey} cameraRef={cameraRef} />
+      ) : null}
       {showPreview ? <ScanPreviewView uri={activeImage.uri} /> : null}
 
       {isBusy ? (

@@ -1,5 +1,4 @@
-import type { RefObject } from 'react';
-import { StyleSheet, View, type View as RNView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import IconHome from '@tabler/icons-react-native/IconHome';
 import IconHistory from '@tabler/icons-react-native/IconHistory';
@@ -23,7 +22,6 @@ type AppTabBarProps = {
     }) => { defaultPrevented: boolean };
     navigate: (name: string) => void;
   };
-  blurTargetRef?: RefObject<RNView | null>;
   /** Keep mounted; hide visually on nested stack screens to avoid BlurView remount crashes. */
   visible?: boolean;
 };
@@ -38,7 +36,6 @@ const TAB_ROUTES = {
 export function AppTabBar({
   state,
   navigation,
-  blurTargetRef,
   visible = true,
 }: AppTabBarProps) {
   const insets = useSafeAreaInsets();
@@ -74,7 +71,7 @@ export function AppTabBar({
       accessibilityElementsHidden={!visible}
       importantForAccessibility={visible ? 'auto' : 'no-hide-descendants'}>
       <View style={styles.row}>
-        <TabPill blurTargetRef={blurTargetRef}>
+        <TabPill>
           <TabPillSlot>
             <NavTabButton
               icon={IconHome}

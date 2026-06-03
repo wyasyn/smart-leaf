@@ -67,6 +67,10 @@ export function ScanResultScreen() {
 
   const handleScanAgain = () => {
     reset();
+    if (router.canGoBack()) {
+      router.back();
+      return;
+    }
     router.replace('/(main)/(scan)');
   };
 

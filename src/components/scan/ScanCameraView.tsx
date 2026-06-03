@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   fill: {
     flex: 1,
     width: '100%',
+    backgroundColor: '#000',
   },
   permission: {
     alignItems: 'center',
