@@ -1,15 +1,37 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import 'react-native-gesture-handler';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import { NavigationBar } from 'expo-navigation-bar';
+import { Stack } from 'expo-router';
+import { useEffect } from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+import { stackScreenOptions } from '@/constants/stack-screen-options';
+import { SmartLeafModelProvider } from '@/ml/SmartLeafModelProvider';
+
+export default function RootLayout() {
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      NavigationBar.setStyle('light');
+    }
+  }, []);
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <SafeAreaProvider style={styles.root}>
+      <SmartLeafModelProvider>
+        <View style={styles.root}>
+          <Stack screenOptions={stackScreenOptions}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(main)" />
+          </Stack>
+        </View>
+      </SmartLeafModelProvider>
+    </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});

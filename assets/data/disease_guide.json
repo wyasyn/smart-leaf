@@ -1,0 +1,1053 @@
+{
+  "0": {
+    "disease_name": "Apple Scab",
+    "common_names": [
+      "Apple scab"
+    ],
+    "crop": "Apple",
+    "description": "A fungal disease caused by Venturia inaequalis that affects the leaves and fruit of apple trees, resulting in olive-green to black velvety lesions.",
+    "symptoms": [
+      "Dark, scabby lesions on leaves and fruit",
+      "Premature leaf drop"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides like captan or myclobutanil",
+      "Remove infected leaves and fruit"
+    ],
+    "prevention": [
+      "Prune trees for better air circulation",
+      "Plant resistant varieties"
+    ],
+    "image_urls": [
+      "https://extension.umn.edu/sites/extension.umn.edu/files/styles/caption_medium/public/Apple-scab-advanced-leaves-Grabowski.jpg?itok=T4Qvttai",
+      "https://extension.umn.edu/sites/extension.umn.edu/files/styles/caption_medium/public/Apple-scab-on-fruit-grabowski.jpg?itok=tk9hY_5J",
+      "https://extension.umn.edu/sites/extension.umn.edu/files/styles/caption_medium/public/apple-scab-2.jpg?itok=kVGvqYrJ"
+    ],
+    "management_tips": "Monitor trees during wet seasons and apply fungicide as needed.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7-10 days during wet periods",
+    "localized_tips": "Ensure proper pruning to reduce humidity",
+    "type": "Fungal",
+    "external_resources": [
+      {
+        "title": "Apple Scab Management",
+        "url": "https://example.com/apple-scab"
+      }
+    ]
+  },
+  "1": {
+    "disease_name": "Black Rot",
+    "common_names": [
+      "Apple black rot"
+    ],
+    "crop": "Apple",
+    "description": "Caused by the fungus Botryosphaeria obtusa, black rot affects the fruit, leaves, and bark of apple trees.",
+    "symptoms": [
+      "Circular brown lesions on fruit",
+      "Purple-bordered leaf spots"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Remove and destroy infected branches and fruit",
+      "Apply fungicides in early spring"
+    ],
+    "prevention": [
+      "Sanitize pruning tools",
+      "Clear fallen debris"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeP9Fk4I1LQz7xnC-Z-g9axul8FwMr-G4pTw&s",
+      "https://www.ontario.ca/files/2022-07/omafra-black-rot-figure-1-en-400x308-2022-07-21-v1.jpg"
+    ],
+    "management_tips": "Clean up mummified fruits and dead wood from the orchard.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 10-14 days",
+    "localized_tips": "Remove mummified fruit and prune affected branches",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "2": {
+    "disease_name": "Cedar Apple Rust",
+    "common_names": [
+      "Cedar rust"
+    ],
+    "crop": "Apple",
+    "description": "A fungal disease requiring both apple and cedar (juniper) hosts to complete its lifecycle.",
+    "symptoms": [
+      "Bright orange spots on leaves",
+      "Galls on cedar trees"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicide such as mancozeb",
+      "Remove nearby cedar trees if possible"
+    ],
+    "prevention": [
+      "Use resistant varieties",
+      "Space trees to increase airflow"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH89RW-_c0r5KRSlfubVUcmxxPZe1ZblUEaw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ45DSHrdt0fGo5JQdiXeRAO4RVIBhDWi25g&s"
+    ],
+    "management_tips": "Monitor both apple and cedar hosts for symptoms and apply fungicide preventively.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 7-10 days during infection periods",
+    "localized_tips": "Avoid planting near cedar trees",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "3": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Apple",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Maintain good cultural practices"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUNXxrAxcd5eIrkNm_N9bok_6vmrryOUGx_Q&s"
+    ],
+    "management_tips": "Regular inspection and proper irrigation help maintain plant health.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive fungicide once per month",
+    "localized_tips": "Keep foliage dry by watering at the base",
+    "type": "None",
+    "external_resources": []
+  },
+  "4": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Blueberry",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Maintain good cultural practices"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO5Fa4hjkNegnkvqlQM_IuouJ9Y09wOuOKEA&s"
+    ],
+    "management_tips": "Regularly inspect bushes and provide adequate watering and mulching.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive fungicide once per month if necessary",
+    "localized_tips": "Water at the base and avoid overhead irrigation",
+    "type": "None",
+    "external_resources": []
+  },
+  "5": {
+    "disease_name": "Powdery Mildew",
+    "common_names": [
+      "Cherry powdery mildew"
+    ],
+    "crop": "Cherry (including sour)",
+    "description": "A fungal disease caused by Podosphaera clandestina, affecting leaves, shoots, and fruits with white powdery growth.",
+    "symptoms": [
+      "White powdery spots on leaves and young shoots",
+      "Curling or distortion of leaves",
+      "Reduced fruit quality"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides such as sulfur or myclobutanil",
+      "Prune infected shoots and leaves"
+    ],
+    "prevention": [
+      "Ensure good air circulation through pruning",
+      "Avoid overhead irrigation"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4sBjg-S_wq4A5N1v6eBRJd1x0Jbo5irA2Yw&s"
+    ],
+    "management_tips": "Monitor during dry, warm weather and treat at first signs of infection.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 7-14 days during outbreak",
+    "localized_tips": "Avoid planting in shaded, poorly ventilated areas",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "6": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Cherry (including sour)",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Practice regular pruning and sanitation"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7o-uXeQbNFIXPzKtuYGuqlr4HtYYOPmLYg&s"
+    ],
+    "management_tips": "Monitor regularly and provide balanced fertilization for tree vigor.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive fungicide every 3-4 weeks if needed",
+    "localized_tips": "Ensure trees are spaced properly for air flow",
+    "type": "None",
+    "external_resources": []
+  },
+  "7": {
+    "disease_name": "Gray Leaf Spot",
+    "common_names": [
+      "Cercospora Leaf Spot",
+      "Gray Leaf Spot"
+    ],
+    "crop": "Corn (maize)",
+    "description": "A fungal disease caused by Cercospora zeae-maydis, which causes rectangular lesions on corn leaves.",
+    "symptoms": [
+      "Long, narrow, rectangular gray to tan lesions on leaves",
+      "Leaf tissue death and premature blight"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides such as strobilurins or triazoles",
+      "Use crop rotation to reduce residue-borne inoculum"
+    ],
+    "prevention": [
+      "Plant resistant hybrids",
+      "Rotate crops and manage crop residue"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHI10MbkwEpAQYh7nC9xk1GAZjLFg_twf4Pg&s"
+    ],
+    "management_tips": "Scout fields early and apply fungicides when necessary to prevent yield loss.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7-10 days if conditions favor infection",
+    "localized_tips": "Avoid continuous corn planting and use no-till residue management",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "8": {
+    "disease_name": "Common Rust",
+    "common_names": [
+      "Corn Rust"
+    ],
+    "crop": "Corn (maize)",
+    "description": "A fungal disease caused by Puccinia sorghi, forming reddish-brown pustules on leaves.",
+    "symptoms": [
+      "Small, round, reddish-brown pustules on both leaf surfaces",
+      "Yellowing and premature leaf death"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Use fungicides like azoxystrobin or propiconazole",
+      "Use resistant hybrids"
+    ],
+    "prevention": [
+      "Crop rotation",
+      "Avoid overhead irrigation"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYkjmhmODjdmkVFoJrzJevwugu3L-2k6j32w&s"
+    ],
+    "management_tips": "Early detection is key; apply fungicides at first signs.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 10–14 days during active rust periods",
+    "localized_tips": "Remove infected debris post-harvest",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "9": {
+    "disease_name": "Northern Leaf Blight",
+    "common_names": [
+      "NLB"
+    ],
+    "crop": "Corn (maize)",
+    "description": "Caused by Exserohilum turcicum, this disease leads to cigar-shaped lesions and premature leaf death.",
+    "symptoms": [
+      "Long, elliptical gray-green lesions on leaves",
+      "Leaf blighting and reduced grain fill"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides like pyraclostrobin or propiconazole",
+      "Destroy infected crop residue"
+    ],
+    "prevention": [
+      "Plant resistant hybrids",
+      "Rotate crops"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJS99Oqn5fkTtVncGWg7oVech4zFnXk7bRjw&s"
+    ],
+    "management_tips": "Monitor weather and leaf conditions during humid periods.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7–10 days under high pressure",
+    "localized_tips": "Use proper tillage to reduce infected debris",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "10": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Corn (maize)",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Use good agricultural practices and resistant hybrids"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtdqsAoMG75wIISvVBPSmz7GVhrIKQ7BPn9g&s"
+    ],
+    "management_tips": "Inspect regularly and ensure balanced nutrition and watering.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive spray once per month if needed",
+    "localized_tips": "Avoid crowding and ensure proper spacing",
+    "type": "None",
+    "external_resources": []
+  },
+  "11": {
+    "disease_name": "Black Rot",
+    "common_names": [
+      "Grape Black Rot"
+    ],
+    "crop": "Grape",
+    "description": "A fungal disease caused by Guignardia bidwellii that affects all green parts of the grapevine.",
+    "symptoms": [
+      "Small black spots on leaves and stems",
+      "Fruit mummification and shriveling"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides like mancozeb or myclobutanil",
+      "Remove and destroy infected plant parts"
+    ],
+    "prevention": [
+      "Ensure proper canopy airflow",
+      "Use resistant cultivars"
+    ],
+    "image_urls": [
+      "https://miro.medium.com/v2/resize:fit:700/1*TKUvZfHReYQvuh83B1CWPg.jpeg"
+    ],
+    "management_tips": "Remove mummified berries and infected leaves promptly.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7–10 days during bloom and fruit development",
+    "localized_tips": "Use drip irrigation to avoid wet foliage",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "12": {
+    "disease_name": "Esca (Black Measles)",
+    "common_names": [
+      "Esca",
+      "Black Measles"
+    ],
+    "crop": "Grape",
+    "description": "A complex fungal disease involving multiple pathogens including Phaeomoniella and Phaeoacremonium species.",
+    "symptoms": [
+      "Interveinal leaf chlorosis and necrosis",
+      "Black spots or 'measles' on fruit",
+      "Sudden vine collapse in late summer"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "No effective chemical treatment; remove affected vines"
+    ],
+    "prevention": [
+      "Avoid pruning during wet conditions",
+      "Sterilize tools"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZnEb_p8vYGzb_3LPsNcQvYaVhZqqa2t-APQ&s"
+    ],
+    "management_tips": "Avoid pruning wounds and maintain vine health.",
+    "risk_level": "High",
+    "sprayer_intervals": "Not applicable",
+    "localized_tips": "Discard infected wood and apply wound protectants",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "13": {
+    "disease_name": "Leaf Blight (Isariopsis Leaf Spot)",
+    "common_names": [
+      "Isariopsis Leaf Spot"
+    ],
+    "crop": "Grape",
+    "description": "Caused by the fungus Isariopsis clavispora, resulting in necrotic leaf spots and defoliation.",
+    "symptoms": [
+      "Angular brown or black spots on leaves",
+      "Leaf yellowing and premature drop"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides like mancozeb or copper-based sprays",
+      "Remove fallen leaves"
+    ],
+    "prevention": [
+      "Ensure proper spacing",
+      "Control canopy humidity"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgQz8zj52yjnunmqCrHoh4WIQrECBeIcAORw&s"
+    ],
+    "management_tips": "Apply treatments before symptoms become severe.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 10–14 days during wet weather",
+    "localized_tips": "Increase airflow and use trellising",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "14": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Grape",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Prune correctly and inspect regularly"
+    ],
+    "image_urls": [
+      "https://www.superfoodevolution.com/images/wild-grape-leaf-Vitis-californica.jpg"
+    ],
+    "management_tips": "Use fungicide preventively during wet seasons.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive fungicide every 3–4 weeks if necessary",
+    "localized_tips": "Monitor canopy humidity and avoid overhead watering",
+    "type": "None",
+    "external_resources": []
+  },
+  "15": {
+    "disease_name": "Huanglongbing (Citrus Greening)",
+    "common_names": [
+      "Citrus Greening",
+      "HLB"
+    ],
+    "crop": "Orange",
+    "description": "A bacterial disease caused by Candidatus Liberibacter spp., spread by the Asian citrus psyllid.",
+    "symptoms": [
+      "Yellow shoots and blotchy leaf mottling",
+      "Small, lopsided, bitter fruits",
+      "Tree decline and dieback"
+    ],
+    "cause": "Bacterial",
+    "treatment": [
+      "No cure; remove and destroy infected trees"
+    ],
+    "prevention": [
+      "Control psyllid vectors with insecticides",
+      "Use certified disease-free planting material"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzjdXUjfWbjsFlYfdLHC926DeNZZm_nH3RQQ&s"
+    ],
+    "management_tips": "Monitor psyllid populations and report suspicious trees.",
+    "risk_level": "Very High",
+    "sprayer_intervals": "Insecticides every 10–14 days in active vector areas",
+    "localized_tips": "Use screenhouses or barriers for young trees",
+    "type": "Bacterial",
+    "external_resources": [
+      {
+        "title": "HLB Management from USDA",
+        "url": "https://www.usda.gov/topics/farming/huanglongbing"
+      }
+    ]
+  },
+  "16": {
+    "disease_name": "Bacterial Spot",
+    "common_names": [
+      "Peach Bacterial Spot"
+    ],
+    "crop": "Peach",
+    "description": "A bacterial disease caused by Xanthomonas campestris pv. pruni, affecting leaves, fruit, and twigs.",
+    "symptoms": [
+      "Small, water-soaked spots on leaves that turn dark and angular",
+      "Sunken lesions on fruit leading to cracking",
+      "Twig dieback in severe infections"
+    ],
+    "cause": "Bacterial",
+    "treatment": [
+      "Apply copper-based bactericides",
+      "Prune out infected branches"
+    ],
+    "prevention": [
+      "Use resistant cultivars",
+      "Sanitize tools between pruning"
+    ],
+    "image_urls": [
+      "https://www.canr.msu.edu/ipm/uploads/images/Fruit/leavesBacterialspot.jpg"
+    ],
+    "management_tips": "Monitor after rain events and apply copper sprays early in the season.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7–14 days during wet weather",
+    "localized_tips": "Avoid overhead irrigation to reduce leaf wetness",
+    "type": "Bacterial",
+    "external_resources": []
+  },
+  "17": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Peach",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Maintain proper pruning and sanitation"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1rSD3dc8reXTGLPCpvGXeuJhKejzXcmkomqHUlbcSss_k2AxWDf6jIL0ZIR7w3e5uNhQ&usqp=CAU"
+    ],
+    "management_tips": "Ensure balanced fertilization and regular monitoring.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive spray once per month if needed",
+    "localized_tips": "Water at ground level and mulch to conserve moisture",
+    "type": "None",
+    "external_resources": []
+  },
+  "18": {
+    "disease_name": "Bacterial Spot",
+    "common_names": [
+      "Bell Pepper Bacterial Spot"
+    ],
+    "crop": "Pepper, bell",
+    "description": "Caused by Xanthomonas euvesicatoria, this bacterial disease forms spots on leaves and fruit.",
+    "symptoms": [
+      "Circular to irregular water-soaked spots on leaves",
+      "Lesions on fruit causing scabby, cratered spots"
+    ],
+    "cause": "Bacterial",
+    "treatment": [
+      "Apply copper bactericides",
+      "Remove infected plants and debris"
+    ],
+    "prevention": [
+      "Plant certified disease-free seedlings",
+      "Avoid working when foliage is wet"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB73znDvyq3LarGBpPPuPATxIuQJU4FTqRaA&s"
+    ],
+    "management_tips": "Begin sprays prior to flowering and continue through fruit set.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 7–10 days during warm, wet periods",
+    "localized_tips": "Mulch plants and improve air circulation",
+    "type": "Bacterial",
+    "external_resources": []
+  },
+  "19": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Pepper, bell",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Provide balanced nutrients and keep soil moist but not wet"
+    ],
+    "image_urls": [
+      "https://iupilon.com/wp-content/uploads/2021/11/PIXNIO-1778973-1200x838-1.jpeg"
+    ],
+    "management_tips": "Regular scouting and ensure good drainage.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive treatments every 3–4 weeks if needed",
+    "localized_tips": "Avoid crowding and apply mulch to stabilize soil moisture",
+    "type": "None",
+    "external_resources": []
+  },
+  "20": {
+    "disease_name": "Early Blight",
+    "common_names": [
+      "Potato Early Blight"
+    ],
+    "crop": "Potato",
+    "description": "Fungal disease caused by Alternaria solani, infecting leaves, stems, and tubers.",
+    "symptoms": [
+      "Dark brown to black concentric ring spots on leaves",
+      "Lesions on stems and tubers"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides like chlorothalonil or azoxystrobin",
+      "Remove volunteer potato plants and infected debris"
+    ],
+    "prevention": [
+      "Rotate crops annually",
+      "Use certified seed potatoes"
+    ],
+    "image_urls": [
+      "https://vegpath.plantpath.wisc.edu/wp-content/uploads/sites/210/2023/11/potato-early-blight-leaves.jpg"
+    ],
+    "management_tips": "Start sprays when foliage is 10–15 cm tall and repeat on a 7–10 day schedule.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7–10 days during humid conditions",
+    "localized_tips": "Mulch to reduce soil splash and moisture on leaves",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "21": {
+    "disease_name": "Late Blight",
+    "common_names": [
+      "Potato Late Blight"
+    ],
+    "crop": "Potato",
+    "description": "Caused by Phytophthora infestans, leads to rapid plant collapse under cool, wet conditions.",
+    "symptoms": [
+      "Dark, water-soaked lesions on leaves and stems",
+      "White fungal growth under lesions in humid conditions",
+      "Rotting tubers"
+    ],
+    "cause": "Fungal‑like oomycete",
+    "treatment": [
+      "Apply fungicides such as mancozeb or metalaxyl",
+      "Remove and destroy infected foliage immediately"
+    ],
+    "prevention": [
+      "Plant late‑blight resistant varieties",
+      "Monitor weather and disease forecasts"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlMiZMw_XsQAAYBT2zVzO5VlIOZIfdCKWZlA&s"
+    ],
+    "management_tips": "Begin protective sprays when conditions are favorable; reapply every 5–7 days.",
+    "risk_level": "Very High",
+    "sprayer_intervals": "Every 5–7 days in cool wet weather",
+    "localized_tips": "Avoid overhead watering and space hills for airflow",
+    "type": "Fungal‑like",
+    "external_resources": []
+  },
+  "22": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Potato",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Practice crop rotation and use certified seed"
+    ],
+    "image_urls": [
+      "https://keeneorganics.com/wp-content/uploads/2022/03/Potato-Plants.jpg"
+    ],
+    "management_tips": "Ensure well‑drained soil and regular pest scouting.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive fungicide once per month if needed",
+    "localized_tips": "Avoid planting in low areas prone to pooling water",
+    "type": "None",
+    "external_resources": []
+  },
+  "23": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Raspberry",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Maintain proper pruning, fertilization, and site sanitation"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlS205vAtIKDNL-ubs5X56Yb-j9w0fCk04rQ&s"
+    ],
+    "management_tips": "Ensure good air circulation, proper mulching, and monitor for pests.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive treatments once per month, if needed",
+    "localized_tips": "Remove old canes and provide regular irrigation at the root zone",
+    "type": "None",
+    "external_resources": []
+  },
+  "24": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Soybean",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Rotate crops, monitor pests and nutrient levels"
+    ],
+    "image_urls": [
+      "https://agriculture.basf.us/content/dam/cxm/agriculture/crop-protection/news-and-events/images/CRP201800021_Hero_Crop_Imgs_FSR_Soy.jpg"
+    ],
+    "management_tips": "Scout fields regularly and ensure balanced soil fertility.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive fungicide once per month under wet conditions",
+    "localized_tips": "Ensure proper drainage and reduce plant density if necessary",
+    "type": "None",
+    "external_resources": []
+  },
+  "25": {
+    "disease_name": "Powdery Mildew",
+    "common_names": [
+      "Squash powdery mildew"
+    ],
+    "crop": "Squash",
+    "description": "A fungal disease caused by Podosphaera xanthii or Erysiphe cichoracearum, forming white powdery growth on leaves and stems.",
+    "symptoms": [
+      "White to gray powdery patches on leaf surfaces",
+      "Leaf yellowing, curling, and premature defoliation"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides like sulfur, myclobutanil, or potassium bicarbonate",
+      "Remove infected leaves when disease starts"
+    ],
+    "prevention": [
+      "Plant resistant varieties",
+      "Ensure good airflow and avoid overhead watering"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHEhKBVt4bNyHbrAEp8qPDaRqwACT8o6i8wg&s"
+    ],
+    "management_tips": "Treat at first sign of powdery growth and repeat every 7–10 days.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 7–10 days during disease pressure",
+    "localized_tips": "Space plants widely and mulch to reduce humidity",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "26": {
+    "disease_name": "Leaf Scorch",
+    "common_names": [
+      "Strawberry leaf scorch"
+    ],
+    "crop": "Strawberry",
+    "description": "A fungal disease caused by Diplocarpon earlianum, resulting in brown lesions and leaf edge necrosis.",
+    "symptoms": [
+      "Circular to irregular brown lesions on leaves",
+      "Leaf edges turn brown and scorched, leading to defoliation"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides such as captan or chlorothalonil",
+      "Remove and destroy affected leaves"
+    ],
+    "prevention": [
+      "Plant resistant cultivars",
+      "Avoid overhead irrigation and ensure good plant spacing"
+    ],
+    "image_urls": [
+      "https://cdn.mos.cms.futurecdn.net/XkvoUQ5ffAU8j5Fq8DK3Vf.jpg"
+    ],
+    "management_tips": "Spray preventively during warm, wet weather and remove debris post-harvest.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 7–14 days when conditions remain favorable",
+    "localized_tips": "Space beds properly and use drip irrigation",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "27": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Strawberry",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Practice crop rotation and mulching to maintain plant health"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBLjBa_BlAc2Uql9aKRtbsGo0OfIi3i8LheA&s"
+    ],
+    "management_tips": "Monitor regularly for pests and diseases; maintain optimal soil moisture.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive spray once per month if needed",
+    "localized_tips": "Remove dying leaves and monitor plant vigor",
+    "type": "None",
+    "external_resources": []
+  },
+  "28": {
+    "disease_name": "Bacterial Spot",
+    "common_names": [
+      "Tomato Bacterial Spot"
+    ],
+    "crop": "Tomato",
+    "description": "A bacterial disease caused by Xanthomonas spp., producing small, water‑soaked leaf and fruit lesions.",
+    "symptoms": [
+      "Small (≤1/8″), circular brown spots on leaves, often water‑soaked",
+      "Raised scabby lesions on green and ripe fruit"
+    ],
+    "cause": "Bacterial",
+    "treatment": [
+      "Apply copper‑based bactericides",
+      "Use certified disease‑free seed/transplants"
+    ],
+    "prevention": [
+      "Avoid overhead irrigation",
+      "Rotate crops and remove infected debris"
+    ],
+    "image_urls": [
+      "https://www.lsuagcenter.com/~/media/system/e/d/5/f/ed5f2bf2949a12ff123c460961e32e9a/bacterialspotontomatoxant.jpg?bc=white&as=0&mh=400&mw=1110&sc=25&thn=0"
+    ],
+    "management_tips": "Begin sprays early in warm, humid weather and maintain sanitation :contentReference[oaicite:2]{index=2}.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7–10 days during warm, wet weather",
+    "localized_tips": "Use drip irrigation and ensure plant spacing",
+    "type": "Bacterial",
+    "external_resources": []
+  },
+  "29": {
+    "disease_name": "Early Blight",
+    "common_names": [
+      "Tomato Early Blight"
+    ],
+    "crop": "Tomato",
+    "description": "Fungal disease caused by Alternaria solani, with concentric ring lesions on leaves, stems, and fruit.",
+    "symptoms": [
+      "Brown leaf spots with ‘bull’s‑eye’ concentric rings",
+      "Stem lesions and fruit rot"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides (chlorothalonil, azoxystrobin)",
+      "Remove volunteer potatoes and affected debris"
+    ],
+    "prevention": [
+      "Rotate crops annually",
+      "Select resistant varieties"
+    ],
+    "image_urls": [
+      "https://content.ces.ncsu.edu/media/images/IMG_1302.jpeg"
+    ],
+    "management_tips": "Spray when plants reach 10–15 cm and repeat every 7–10 days in humid conditions.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7–10 days under disease pressure",
+    "localized_tips": "Mulch to prevent soil splash",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "30": {
+    "disease_name": "Late Blight",
+    "common_names": [
+      "Tomato late blight"
+    ],
+    "crop": "Tomato",
+    "description": "A serious fungal disease caused by Phytophthora infestans, affecting leaves, stems, and fruit.",
+    "symptoms": [
+      "Large, dark brown blotches with green halos on leaves",
+      "Fruits develop firm, dark lesions"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicide like chlorothalonil or mancozeb",
+      "Remove infected plants"
+    ],
+    "prevention": [
+      "Use resistant varieties",
+      "Rotate crops annually"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTinsCh_IKs65QdgQnGDLO0bLxSG2M8ATaQ2Q&s"
+    ],
+    "management_tips": "Avoid overhead watering to reduce moisture on leaves.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7 days during high humidity",
+    "localized_tips": "Improve drainage and spacing to reduce humidity",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "31": {
+    "disease_name": "Leaf Mold",
+    "common_names": [
+      "Tomato Leaf Mold"
+    ],
+    "crop": "Tomato",
+    "description": "Fungal disease by Passalora fulva, causing olive‑green velvety growth on leaf undersides.",
+    "symptoms": [
+      "Pale green/yellow spots on upper leaves",
+      "Olive‑green velvety sporulation on leaf undersides"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides (chlorothalonil, mancozeb, copper)",
+      "Improve greenhouse ventilation"
+    ],
+    "prevention": [
+      "Maintain <85% humidity",
+      "Use resistant varieties"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPrslOwRy-VnsRixsduZ2YayzOshBdOGklpg&s"
+    ],
+    "management_tips": "Control humidity in protected production settings :contentReference[oaicite:3]{index=3}.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 7–10 days during high humidity",
+    "localized_tips": "Use drip irrigation and space plants wide",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "32": {
+    "disease_name": "Septoria Leaf Spot",
+    "common_names": [
+      "Tomato Septoria Leaf Spot"
+    ],
+    "crop": "Tomato",
+    "description": "A fungal disease by Septoria lycopersici; causes small leaf spots with black fruiting bodies.",
+    "symptoms": [
+      "Circular brown lesions (2–5 mm) with gray centers",
+      "Tiny black pycnidia in the center of spots"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply chlorothalonil or copper fungicides",
+      "Remove infected leaves"
+    ],
+    "prevention": [
+      "Rotate crops 2–3 years",
+      "Use drip irrigation and mulch"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSECMpg3fTcnwaowF9nqFarVvR37t6SZRU31Q&s"
+    ],
+    "management_tips": "Fungicide and sanitation reduce spread :contentReference[oaicite:4]{index=4}.",
+    "risk_level": "High",
+    "sprayer_intervals": "Every 7–14 days when humidity is high",
+    "localized_tips": "Remove lower leaves to improve airflow",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "33": {
+    "disease_name": "Two‑Spotted Spider Mite Infestation",
+    "common_names": [
+      "Spider Mites",
+      "Two‑Spotted Mite"
+    ],
+    "crop": "Tomato",
+    "description": "Stressed plants attacked by Tetranychus urticae, causing speckled foliage and webbing.",
+    "symptoms": [
+      "Yellow stippling on leaves",
+      "Fine webbing on leaf undersides and stems"
+    ],
+    "cause": "Pest (Arachnid)",
+    "treatment": [
+      "Apply miticides or insecticidal soap",
+      "Rinse plants with strong water spray"
+    ],
+    "prevention": [
+      "Maintain adequate humidity",
+      "Encourage predatory mites"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY3jYZW3TucNO1CYqLuGq94lrj-O5UvpiGzA&s"
+    ],
+    "management_tips": "Frequent inspections and early control are essential.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "As directed by product label",
+    "localized_tips": "Avoid excessive nitrogen, which attracts mites",
+    "type": "Pest",
+    "external_resources": []
+  },
+  "34": {
+    "disease_name": "Target Spot",
+    "common_names": [
+      "Tomato Target Spot"
+    ],
+    "crop": "Tomato",
+    "description": "Fungal disease by Corynespora cassiicola, producing circular leaf spots often with concentric rings.",
+    "symptoms": [
+      "Circular to irregular spots with yellow halos",
+      "Lesions may have target‑like rings"
+    ],
+    "cause": "Fungal",
+    "treatment": [
+      "Apply fungicides (chlorothalonil, mancozeb)",
+      "Remove diseased foliage"
+    ],
+    "prevention": [
+      "Use crop rotation",
+      "Avoid overhead watering"
+    ],
+    "image_urls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmQSG-4EedWsEegh5eWGRCVhiDCV0Ia9tTWg&s"
+    ],
+    "management_tips": "Treat early in disease cycle and reduce humidity.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Every 7–10 days in wet conditions",
+    "localized_tips": "Space rows for airflow",
+    "type": "Fungal",
+    "external_resources": []
+  },
+  "35": {
+    "disease_name": "Tomato Yellow Leaf Curl Virus",
+    "common_names": [
+      "TYLCV"
+    ],
+    "crop": "Tomato",
+    "description": "A geminivirus spread by whiteflies, causing leaf yellowing, curling, and stunting.",
+    "symptoms": [
+      "Upward rolling and yellowing of young leaves",
+      "Stunted plant growth"
+    ],
+    "cause": "Viral",
+    "treatment": [
+      "No cure; remove infected plants"
+    ],
+    "prevention": [
+      "Control whitefly vectors",
+      "Use resistant tomato varieties"
+    ],
+    "image_urls": [
+      "https://agriculture.vic.gov.au/__data/assets/image/0017/531602/IU-TYLCV_img_1.jpg"
+    ],
+    "management_tips": "Monitor whiteflies and use reflective mulches.",
+    "risk_level": "High",
+    "sprayer_intervals": "Apply insecticide every 7–14 days during outbreaks",
+    "localized_tips": "Use screened greenhouses in high‑pressure zones",
+    "type": "Viral",
+    "external_resources": []
+  },
+  "36": {
+    "disease_name": "Tomato Mosaic Virus",
+    "common_names": [
+      "ToMV"
+    ],
+    "crop": "Tomato",
+    "description": "A Tobamovirus spread mechanically and via contaminated seed, causing mottling and stunted fruit.",
+    "symptoms": [
+      "Mosaic leaf discoloration",
+      "Leaf distortion and stunted growth"
+    ],
+    "cause": "Viral",
+    "treatment": [
+      "No cure; remove infected plants"
+    ],
+    "prevention": [
+      "Use virus‑free seed and sanitation",
+      "Disinfect tools regularly"
+    ],
+    "image_urls": [
+      "https://ars.els-cdn.com/content/image/3-s2.0-B9780123877376500029-f02-95-9780123877376.jpg"
+    ],
+    "management_tips": "Implement strict hygiene and resistant varieties.",
+    "risk_level": "Medium",
+    "sprayer_intervals": "Not applicable",
+    "localized_tips": "Wear gloves and disinfect between handling plants",
+    "type": "Viral",
+    "external_resources": []
+  },
+  "37": {
+    "disease_name": null,
+    "common_names": [],
+    "crop": "Tomato",
+    "description": "Healthy plant — no disease detected.",
+    "symptoms": [],
+    "cause": null,
+    "treatment": [],
+    "prevention": [
+      "Practice crop rotation and sanitation"
+    ],
+    "image_urls": [
+      "https://www.researchgate.net/publication/273070170/figure/fig6/AS:668577262739488@1536412649928/A-Healthy-leaves-of-tomato-plants-and-B-Leaves-of-tomato-plants-inoculated-with.jpg"
+    ],
+    "management_tips": "Monitor regularly and use balanced fertilization.",
+    "risk_level": "Low",
+    "sprayer_intervals": "Preventive fungicide once per month if needed",
+    "localized_tips": "Ensure good drainage and airflow",
+    "type": "None",
+    "external_resources": []
+  }
+}

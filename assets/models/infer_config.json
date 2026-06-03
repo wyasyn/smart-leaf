@@ -1,0 +1,11 @@
+{
+  "img_size": [
+    224,
+    224
+  ],
+  "input_range": "[0,255] raw RGB",
+  "temperature": 1.05,
+  "conf_threshold": 0.6,
+  "entropy_frac": 0.55,
+  "num_classes": 38
+}
