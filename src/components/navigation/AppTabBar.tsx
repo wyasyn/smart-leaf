@@ -95,10 +95,17 @@ export function AppTabBar({
           </TabPillSlot>
         </TabPill>
 
-        <ScanFab
-          isFocused={isFocused(TAB_ROUTES.scan)}
-          onPress={() => onTabPress(TAB_ROUTES.scan)}
-        />
+        {isFocused(TAB_ROUTES.scan) ? (
+          // On the scan tab the FAB becomes the camera shutter, which is rendered
+          // by ScanScreen at this exact spot. Leave a transparent, non-interactive
+          // spacer so the left pill keeps its position and the shutter shows through.
+          <View style={styles.fabSpacer} pointerEvents="none" />
+        ) : (
+          <ScanFab
+            isFocused={false}
+            onPress={() => onTabPress(TAB_ROUTES.scan)}
+          />
+        )}
       </View>
     </View>
   );
@@ -122,5 +129,9 @@ const styles = StyleSheet.create({
   },
   hidden: {
     opacity: 0,
+  },
+  fabSpacer: {
+    width: 64,
+    height: 64,
   },
 });

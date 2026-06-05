@@ -1,7 +1,8 @@
 import { Pressable, StyleSheet, View, type PressableProps } from 'react-native';
-import IconPlus from '@tabler/icons-react-native/IconPlus';
+
 
 import { colors } from '@/constants/navigation';
+import { IconLineScan } from '@tabler/icons-react-native';
 
 export type ScanFabProps = PressableProps & {
   isFocused?: boolean;
@@ -15,7 +16,7 @@ export function ScanFab({ isFocused, ...props }: ScanFabProps) {
       accessibilityRole="button"
       accessibilityLabel="Scan">
       <View style={styles.inner}>
-        <IconPlus size={28} color="#FFFFFF" strokeWidth={2} />
+        <IconLineScan size={28} color="#FFFFFF" strokeWidth={2} />
       </View>
     </Pressable>
   );

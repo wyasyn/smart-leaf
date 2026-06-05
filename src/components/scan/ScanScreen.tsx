@@ -1,7 +1,8 @@
-import { CameraView } from 'expo-camera';
+import { getMaxZoomFactorAsync } from '@modules/camera-zoom';
+import { CameraView, type CameraType } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import { useFocusEffect, useNavigation, useRouter } from 'expo-router';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useFocusEffect, useNavigation } from 'expo-router';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Platform, StyleSheet, Text, View } from 'react-native';
 
 import { useSmartLeafModel } from '@/ml/SmartLeafModelProvider';
@@ -12,17 +13,37 @@ import {
 } from '@/stores/scan-store';
 import { useSettingsStore } from '@/stores/settings-store';
 
-import { ScanCameraControls } from './ScanCameraControls';
 import { ScanCameraView } from './ScanCameraView';
-import { ScanPreviewControls } from './ScanPreviewControls';
+import { ScanControls } from './ScanControls';
 import { ScanPreviewView } from './ScanPreviewView';
+import { ScanResultOverlay } from './ScanResultOverlay';
+import { buildZoomPresets } from './ScanZoomPill';
 
 export function ScanScreen() {
-  const router = useRouter();
   const navigation = useNavigation();
   const cameraRef = useRef<CameraView>(null);
   const navigatingRef = useRef(false);
-  const [cameraKey, setCameraKey] = useState(0);
+
+  const [zoom, setZoom] = useState(0);
+  const [zoomVisible, setZoomVisible] = useState(false);
+  const [facing, setFacing] = useState<CameraType>('back');
+  const [maxZoomFactor, setMaxZoomFactor] = useState(1);
+
+  // Read the device's true max zoom factor once so 1×/2×/3× map to real magnification.
+  useEffect(() => {
+    let active = true;
+    getMaxZoomFactorAsync().then((max) => {
+      if (active) setMaxZoomFactor(max);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const zoomPresets = useMemo(
+    () => buildZoomPresets(maxZoomFactor),
+    [maxZoomFactor],
+  );
 
   const phase = useScanStore((s) => s.phase);
   const status = useScanStore((s) => s.status);
@@ -30,7 +51,6 @@ export function ScanScreen() {
   const addImage = useScanStore((s) => s.addImage);
   const retake = useScanStore((s) => s.retake);
   const removeActiveImage = useScanStore((s) => s.removeActiveImage);
-  const addAnother = useScanStore((s) => s.addAnother);
   const setStatus = useScanStore((s) => s.setStatus);
   const setResult = useScanStore((s) => s.setResult);
   const setError = useScanStore((s) => s.setError);
@@ -45,9 +65,6 @@ export function ScanScreen() {
     const tabNav = navigation.getParent();
     if (!tabNav) return;
 
-    const unsubFocus = tabNav.addListener('focus', () => {
-      setCameraKey((key) => key + 1);
-    });
     const unsubBlur = tabNav.addListener('blur', () => {
       if (!navigatingRef.current) {
         reset();
@@ -55,7 +72,6 @@ export function ScanScreen() {
     });
 
     return () => {
-      unsubFocus();
       unsubBlur();
     };
   }, [navigation, reset]);
@@ -73,6 +89,7 @@ export function ScanScreen() {
 
     const photo = await cameraRef.current?.takePictureAsync({ quality: 0.9 });
     if (photo?.uri) {
+      setZoomVisible(false);
       addImage(photo.uri);
     }
   };
@@ -85,6 +102,7 @@ export function ScanScreen() {
     });
 
     if (!result.canceled && result.assets[0]?.uri) {
+      setZoomVisible(false);
       addImage(result.assets[0].uri);
     }
   };
@@ -104,24 +122,24 @@ export function ScanScreen() {
         activeImage.uri,
         confThresholdOverride ?? undefined,
       );
+      // Stay on the scan screen — the result renders as an inline card overlay.
       setResult(result);
-      navigatingRef.current = true;
-      router.push('/(main)/(scan)/result');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Diagnosis failed');
     }
   };
 
   const showCamera = phase === 'camera';
-  const showPreview = phase === 'preview' && activeImage;
+  const hasActiveImage = phase === 'preview' && !!activeImage;
   const isBusy = status === 'preprocessing' || status === 'running';
+  const showResult = status === 'done' || status === 'uncertain';
 
   return (
     <View style={styles.container}>
       {showCamera ? (
-        <ScanCameraView key={cameraKey} cameraRef={cameraRef} />
+        <ScanCameraView cameraRef={cameraRef} zoom={zoom} facing={facing} />
       ) : null}
-      {showPreview ? <ScanPreviewView uri={activeImage.uri} /> : null}
+      {hasActiveImage ? <ScanPreviewView uri={activeImage.uri} /> : null}
 
       {isBusy ? (
         <View style={styles.loadingOverlay} pointerEvents="none">
@@ -130,27 +148,35 @@ export function ScanScreen() {
         </View>
       ) : null}
 
-      {showCamera ? (
-        <ScanCameraControls
-          onCapture={handleCapture}
-          onPickFromGallery={handlePickFromGallery}
-          disabled={Platform.OS === 'web'}
-        />
-      ) : null}
-
-      {error && showPreview ? (
+      {error && hasActiveImage ? (
         <View style={styles.errorBanner} pointerEvents="none">
           <Text style={styles.errorText}>{error}</Text>
         </View>
       ) : null}
 
-      {showPreview ? (
-        <ScanPreviewControls
+      {showResult ? (
+        <ScanResultOverlay />
+      ) : showCamera || hasActiveImage ? (
+        <ScanControls
+          phase={showCamera ? 'camera' : 'preview'}
+          busy={isBusy}
+          shutterDisabled={
+            Platform.OS === 'web' ||
+            (!showCamera && modelState !== 'loaded')
+          }
+          onCapture={handleCapture}
+          onPickFromGallery={handlePickFromGallery}
+          onFlipCamera={() =>
+            setFacing((f) => (f === 'back' ? 'front' : 'back'))
+          }
+          onAnalyze={handleAnalyze}
           onRetake={retake}
           onRemove={removeActiveImage}
-          onAddAnother={addAnother}
-          onAnalyze={handleAnalyze}
-          analyzeDisabled={isBusy || modelState !== 'loaded'}
+          zoom={zoom}
+          zoomPresets={zoomPresets}
+          onZoomChange={setZoom}
+          zoomVisible={zoomVisible}
+          onToggleZoom={() => setZoomVisible((v) => !v)}
         />
       ) : null}
     </View>

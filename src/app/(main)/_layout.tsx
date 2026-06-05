@@ -10,6 +10,11 @@ export default function MainLayout() {
   return (
     <View style={styles.container}>
       <Tabs
+        // Keep inactive tab screens attached. On Android the default detaches the
+        // native view, which destroys expo-camera's preview surface and makes the
+        // scan camera come back white/blank. Keeping it attached keeps the camera
+        // session alive so the preview is live instantly on return.
+        detachInactiveScreens={false}
         tabBar={(props) => (
           <AppTabBar {...props} visible={showTabBar} />
         )}

@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '@/constants/navigation';
 import { useTabBarInset } from '@/hooks/use-tab-bar-inset';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export type ListItem = {
   id: string;
@@ -72,9 +73,9 @@ export function ScreenContainer({
   children: ReactNode;
 }) {
   const tabBarInset = useTabBarInset();
-
+  const insets = useSafeAreaInsets();
   return (
-    <View style={[styles.container, { paddingBottom: tabBarInset }]}>
+    <View style={[styles.container, { paddingBottom: tabBarInset, paddingTop: insets.top }]}>
       <Text style={styles.title}>{title}</Text>
       {children}
     </View>

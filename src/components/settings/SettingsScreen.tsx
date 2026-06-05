@@ -3,17 +3,17 @@ import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import inferConfig from '@/assets/models/infer_config.json';
 import { colors } from '@/constants/navigation';
 import { CLASS_COUNT } from '@/data/diseaseGuide';
-import { useTabBarInset } from '@/hooks/use-tab-bar-inset';
 import { MODEL_VERSION } from '@/ml/inference';
 import { useHistoryStore } from '@/stores/history-store';
 import { useSettingsStore } from '@/stores/settings-store';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const THRESHOLD_MIN = 0.5;
 const THRESHOLD_MAX = 0.9;
 const THRESHOLD_STEP = 0.05;
 
 export function SettingsScreen() {
-  const tabBarInset = useTabBarInset();
+  const insets = useSafeAreaInsets();
   const confOverride = useSettingsStore((s) => s.confThresholdOverride);
   const setConfOverride = useSettingsStore((s) => s.setConfThresholdOverride);
   const language = useSettingsStore((s) => s.language);
@@ -54,7 +54,7 @@ export function SettingsScreen() {
   };
 
   return (
-    <View style={[styles.container, { paddingBottom: tabBarInset }]}>
+    <View style={[styles.container, { paddingBottom: insets.bottom, paddingTop: insets.top }]}>
       <Text style={styles.title}>Settings</Text>
       <View style={styles.listWrap}>
         <SettingsInfoRow label="Model" detail={MODEL_VERSION} />

@@ -1,12 +1,13 @@
-import type { ReactNode } from 'react';
 import { Image } from 'expo-image';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import type { ReactNode } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { riskColor } from '@/constants/diagnosis';
 import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry } from '@/data/diseaseGuide';
+import { IconArrowLeft } from '@tabler/icons-react-native';
 
 /** Offline-first: remote galleries and links are hidden until online support is added. */
 const SHOW_ONLINE_CONTENT = false;
@@ -76,7 +77,8 @@ export function DiseaseDetailScreen() {
         { paddingTop: insets.top + 12, paddingBottom: insets.bottom + 32 },
       ]}>
       <Pressable onPress={() => router.back()} style={styles.back}>
-        <Text style={styles.link}>← Back</Text>
+        <IconArrowLeft size={24} color={colors.primary} strokeWidth={2} />
+        <Text style={styles.link}>Back</Text>
       </Pressable>
 
       <Text style={styles.title}>{title}</Text>
@@ -185,6 +187,9 @@ const styles = StyleSheet.create({
   },
   back: {
     marginBottom: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   },
   link: {
     color: colors.primary,

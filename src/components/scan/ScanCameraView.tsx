@@ -1,11 +1,19 @@
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions, type CameraType } from 'expo-camera';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 type ScanCameraViewProps = {
   cameraRef: React.RefObject<CameraView | null>;
+  /** Camera zoom, 0–1 over the device's available range. */
+  zoom?: number;
+  /** Which lens to use. */
+  facing?: CameraType;
 };
 
-export function ScanCameraView({ cameraRef }: ScanCameraViewProps) {
+export function ScanCameraView({
+  cameraRef,
+  zoom = 0,
+  facing = 'back',
+}: ScanCameraViewProps) {
   const [permission, requestPermission] = useCameraPermissions();
 
   if (!permission) {
@@ -25,8 +33,11 @@ export function ScanCameraView({ cameraRef }: ScanCameraViewProps) {
     );
   }
 
+  // The scan tab is kept attached (detachInactiveScreens={false} in the tabs layout),
+  // so this CameraView stays mounted across tab switches and the preview surface is
+  // never destroyed — the camera is live the instant you return, with no white frame.
   return (
-    <CameraView ref={cameraRef} style={styles.fill} facing="back" />
+    <CameraView ref={cameraRef} style={styles.fill} facing={facing} zoom={zoom} />
   );
 }
 
