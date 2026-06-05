@@ -3,6 +3,7 @@ import type { TfliteModel } from 'react-native-fast-tflite';
 import classNames from '@/assets/models/class_names.json';
 import inferConfig from '@/assets/models/infer_config.json';
 
+import { NOT_A_LEAF_LABEL, NOT_A_LEAF_VERDICT } from './constants';
 import { imageToInput } from './preprocess';
 import type { ConfidenceLevel, PredictionResult, TopPrediction } from './types';
 
@@ -89,14 +90,21 @@ export function buildResult(
     .sort((a, b) => probs[b] - probs[a])
     .slice(0, topk);
   const names = classNames as Record<string, string>;
+  // The retrained model has a dedicated out-of-distribution class. When it wins,
+  // never report a disease — surface a clear "not a leaf" rejection instead.
+  const isNotLeaf = names[String(topIdx)] === NOT_A_LEAF_LABEL;
   return {
     predicted_class_index: topIdx,
     label: names[String(topIdx)],
     confidence: round4(top),
     confidence_level: confidenceLevel(top),
-    is_confident: ok,
-    verdict: ok ? names[String(topIdx)] : 'Uncertain',
-    reason,
+    is_confident: isNotLeaf ? false : ok,
+    verdict: isNotLeaf
+      ? NOT_A_LEAF_VERDICT
+      : ok
+        ? names[String(topIdx)]
+        : 'Uncertain',
+    reason: isNotLeaf ? 'not a leaf' : reason,
     all_predictions: order.map(
       (i): TopPrediction => ({
         index: i,

@@ -1,5 +1,6 @@
 import diseaseGuideJson from '@/assets/data/disease_guide.json';
 import classNames from '@/assets/models/class_names.json';
+import { NOT_A_LEAF_LABEL } from '@/ml/constants';
 
 export type DiseaseGuideEntry = {
   disease_name: string | null;
@@ -40,6 +41,8 @@ export function listLibraryEntries(): LibraryListItem[] {
   const names = classNames as Record<string, string>;
   return Object.keys(names)
     .map((key) => Number(key))
+    // The out-of-distribution reject class is not a browsable disease.
+    .filter((index) => names[String(index)] !== NOT_A_LEAF_LABEL)
     .sort((a, b) => a - b)
     .map((index) => {
       const entry = guide[String(index)];
@@ -77,4 +80,6 @@ export function filterLibraryEntries(
   });
 }
 
-export const CLASS_COUNT = Object.keys(classNames).length;
+export const CLASS_COUNT = Object.values(
+  classNames as Record<string, string>,
+).filter((name) => name !== NOT_A_LEAF_LABEL).length;

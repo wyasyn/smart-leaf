@@ -19,6 +19,7 @@ import {
 import { confidenceChipColor, riskColor } from '@/constants/diagnosis';
 import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry } from '@/data/diseaseGuide';
+import { NOT_A_LEAF_MESSAGE, NOT_A_LEAF_VERDICT } from '@/ml/constants';
 import { useTabBarInset } from '@/hooks/use-tab-bar-inset';
 import { useHistoryStore } from '@/stores/history-store';
 import { useActiveScanImage, useScanStore } from '@/stores/scan-store';
@@ -41,16 +42,21 @@ export function ScanResultOverlay() {
 
   const guide = getDiseaseGuideEntry(result.predicted_class_index);
   const isHealthy = guide?.disease_name == null;
-  const uncertain = result.verdict === 'Uncertain';
+  const notLeaf = result.verdict === NOT_A_LEAF_VERDICT;
+  const uncertain = result.verdict === 'Uncertain' || notLeaf;
   const crop = guide?.crop ?? 'Plant';
-  const title = uncertain
-    ? 'Uncertain result'
-    : isHealthy
-      ? `${crop} — Healthy`
-      : (guide?.disease_name ?? result.verdict);
-  const description = uncertain
-    ? result.reason
-    : (guide?.description ?? '');
+  const title = notLeaf
+    ? 'Not a leaf'
+    : uncertain
+      ? 'Uncertain result'
+      : isHealthy
+        ? `${crop} — Healthy`
+        : (guide?.disease_name ?? result.verdict);
+  const description = notLeaf
+    ? NOT_A_LEAF_MESSAGE
+    : uncertain
+      ? result.reason
+      : (guide?.description ?? '');
   const risk = guide?.risk_level ?? 'Low';
 
   const handleDetails = () => {
@@ -94,6 +100,7 @@ export function ScanResultOverlay() {
             </Text>
           ) : null}
 
+          {!notLeaf ? (
           <View style={styles.statsRow}>
             <View style={styles.statTile}>
               <View style={styles.statHeader}>
@@ -129,6 +136,7 @@ export function ScanResultOverlay() {
               </Pressable>
             ) : null}
           </View>
+          ) : null}
 
           <View style={styles.actionsRow}>
             <Pressable

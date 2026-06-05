@@ -15,6 +15,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { confidenceChipColor, riskColor } from '@/constants/diagnosis';
 import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry } from '@/data/diseaseGuide';
+import { NOT_A_LEAF_MESSAGE, NOT_A_LEAF_VERDICT } from '@/ml/constants';
 import { useActiveScanImage, useScanStore } from '@/stores/scan-store';
 import { useHistoryStore } from '@/stores/history-store';
 
@@ -47,7 +48,8 @@ export function ScanResultScreen() {
     ? 'Healthy'
     : (guide?.disease_name ?? result.verdict);
   const risk = guide?.risk_level ?? 'Low';
-  const uncertain = result.verdict === 'Uncertain';
+  const notLeaf = result.verdict === NOT_A_LEAF_VERDICT;
+  const uncertain = result.verdict === 'Uncertain' || notLeaf;
 
   const handleSave = async () => {
     if (!activeImage?.uri || saved || saving) return;
@@ -93,14 +95,18 @@ export function ScanResultScreen() {
       ) : null}
 
       <Text style={styles.cropLine}>
-        {crop}
+        {notLeaf ? 'Not a leaf' : crop}
         {!uncertain ? ` — ${diseaseLabel}` : ''}
       </Text>
 
       {uncertain ? (
         <View style={styles.uncertainBox}>
-          <Text style={styles.uncertainTitle}>Uncertain</Text>
-          <Text style={styles.uncertainReason}>{result.reason}</Text>
+          <Text style={styles.uncertainTitle}>
+            {notLeaf ? 'Not a leaf' : 'Uncertain'}
+          </Text>
+          <Text style={styles.uncertainReason}>
+            {notLeaf ? NOT_A_LEAF_MESSAGE : result.reason}
+          </Text>
           <Pressable onPress={() => setShowPossibilities((v) => !v)}>
             <Text style={styles.link}>
               {showPossibilities ? 'Hide possibilities' : 'Show possibilities anyway'}

@@ -21,6 +21,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { confidenceChipColor, riskColor } from '@/constants/diagnosis';
 import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry } from '@/data/diseaseGuide';
+import { NOT_A_LEAF_MESSAGE, NOT_A_LEAF_VERDICT } from '@/ml/constants';
 import { useHistoryStore } from '@/stores/history-store';
 
 /** Detail view for a saved scan. Mirrors the disease detail layout. */
@@ -58,12 +59,13 @@ export function ScanDetailScreen() {
   const guide = getDiseaseGuideEntry(result.predicted_class_index);
   const isHealthy = guide?.disease_name == null;
   const crop = guide?.crop ?? 'Plant';
-  const uncertain = result.verdict === 'Uncertain';
+  const notLeaf = result.verdict === NOT_A_LEAF_VERDICT;
+  const uncertain = result.verdict === 'Uncertain' || notLeaf;
   const diseaseLabel = isHealthy
     ? 'Healthy'
     : (guide?.disease_name ?? result.verdict);
   const risk = guide?.risk_level ?? 'Low';
-  const title = uncertain ? crop : `${crop} — ${diseaseLabel}`;
+  const title = notLeaf ? 'Not a leaf' : uncertain ? crop : `${crop} — ${diseaseLabel}`;
   const scannedAt = new Date(createdAt).toLocaleString();
 
   const handleViewDisease = () => {
@@ -124,8 +126,12 @@ export function ScanDetailScreen() {
 
           {uncertain ? (
             <View style={styles.uncertainBox}>
-              <Text style={styles.uncertainTitle}>Uncertain result</Text>
-              <Text style={styles.uncertainReason}>{result.reason}</Text>
+              <Text style={styles.uncertainTitle}>
+                {notLeaf ? 'Not a leaf' : 'Uncertain result'}
+              </Text>
+              <Text style={styles.uncertainReason}>
+                {notLeaf ? NOT_A_LEAF_MESSAGE : result.reason}
+              </Text>
             </View>
           ) : (
             <View style={styles.chipsRow}>
