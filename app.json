@@ -52,7 +52,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow Smart Leaf to access your camera to scan plants.",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera to scan plants and recognize diseases.",
           "microphonePermission": false,
           "recordAudioAndroid": false
         }
@@ -60,7 +60,13 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow Smart Leaf to access your photos to pick plant images."
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to pick plant images."
+        }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
         }
       ]
     ],
