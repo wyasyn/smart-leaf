@@ -7,6 +7,13 @@ export default function LibraryLayout() {
     <Stack screenOptions={stackScreenOptions}>
       <Stack.Screen name="index" />
       <Stack.Screen
+        name="all"
+        options={{
+          animation: 'slide_from_right',
+          gestureEnabled: true,
+        }}
+      />
+      <Stack.Screen
         name="[id]"
         options={{
           animation: 'slide_from_right',

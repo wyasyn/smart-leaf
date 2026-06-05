@@ -1,5 +1,5 @@
-import { LibraryScreen } from '@/components/library/LibraryScreen';
+import { HomeScreen } from '@/components/home/HomeScreen';
 
 export default function LibraryIndex() {
-  return <LibraryScreen />;
+  return <HomeScreen />;
 }

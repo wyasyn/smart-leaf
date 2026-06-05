@@ -31,7 +31,7 @@ export function ScanResultScreen() {
 
   if (!result) {
     return (
-      <View style={[styles.container, { paddingTop: insets.top + 24 }]}>
+      <View style={styles.container}>
         <Text style={styles.title}>No result</Text>
         <Pressable onPress={() => router.back()}>
           <Text style={styles.link}>Go back</Text>
@@ -86,7 +86,7 @@ export function ScanResultScreen() {
       style={styles.scroll}
       contentContainerStyle={[
         styles.content,
-        { paddingTop: insets.top + 16, paddingBottom: insets.bottom + 24 },
+        { paddingBottom: insets.bottom + 24 },
       ]}>
       {activeImage ? (
         <Image source={{ uri: activeImage.uri }} style={styles.thumbnail} contentFit="cover" />
@@ -177,12 +177,14 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: 20,
+    paddingTop: 28,
     gap: 16,
   },
   container: {
     flex: 1,
     backgroundColor: colors.screenBackground,
     paddingHorizontal: 24,
+    paddingTop: 72,
   },
   title: {
     fontSize: 22,

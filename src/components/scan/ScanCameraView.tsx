@@ -1,5 +1,9 @@
+import { IconCamera } from '@tabler/icons-react-native';
 import { CameraView, useCameraPermissions, type CameraType } from 'expo-camera';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
+
+const ACCENT = '#3DBB6E';
 
 type ScanCameraViewProps = {
   cameraRef: React.RefObject<CameraView | null>;
@@ -21,14 +25,40 @@ export function ScanCameraView({
   }
 
   if (!permission.granted) {
+    // Once the user has permanently denied access, the OS prompt no longer
+    // appears — send them to Settings instead.
+    const deniedForever = permission.canAskAgain === false;
+    const onPress = deniedForever
+      ? () => Linking.openSettings()
+      : requestPermission;
+
     return (
       <View style={[styles.fill, styles.permission]}>
-        <Text style={styles.permissionText}>
-          Camera access is required to scan plants.
-        </Text>
-        <Pressable style={styles.permissionButton} onPress={requestPermission}>
-          <Text style={styles.permissionButtonText}>Grant permission</Text>
-        </Pressable>
+        <Animated.View
+          entering={FadeIn.duration(250)}
+          style={styles.card}
+        >
+          <View style={styles.iconBadge}>
+            <IconCamera size={22} color={ACCENT} strokeWidth={1.9} />
+          </View>
+
+          <Text style={styles.title}>Camera Access</Text>
+          <Text style={styles.body}>
+            Allow the camera to scan plant leaves.
+          </Text>
+
+          <Pressable
+            onPress={onPress}
+            style={({ pressed }) => [
+              styles.button,
+              pressed && styles.buttonPressed,
+            ]}
+          >
+            <Text style={styles.buttonText}>
+              {deniedForever ? 'Open Settings' : 'Allow'}
+            </Text>
+          </Pressable>
+        </Animated.View>
       </View>
     );
   }
@@ -50,24 +80,55 @@ const styles = StyleSheet.create({
   permission: {
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 16,
     padding: 24,
     backgroundColor: '#000',
   },
-  permissionText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+  card: {
+    width: 280,
+    alignItems: 'center',
+    paddingVertical: 24,
+    paddingHorizontal: 22,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255,255,255,0.75)',
+    gap: 8,
+  },
+  iconBadge: {
+    width: 48,
+    height: 48,
+    borderRadius: 16,
+    backgroundColor: 'rgba(61,187,110,0.14)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 4,
+  },
+  title: {
+    color: '#111827',
+    fontSize: 17,
+    fontWeight: '600',
     textAlign: 'center',
   },
-  permissionButton: {
-    backgroundColor: '#3DBB6E',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 8,
+  body: {
+    color: '#6B7280',
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: 'center',
   },
-  permissionButtonText: {
+  button: {
+    marginTop: 14,
+    alignSelf: 'stretch',
+    backgroundColor: ACCENT,
+    paddingVertical: 12,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonPressed: {
+    opacity: 0.85,
+    transform: [{ scale: 0.97 }],
+  },
+  buttonText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '600',
   },
 });
