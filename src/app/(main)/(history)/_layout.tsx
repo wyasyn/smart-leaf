@@ -13,6 +13,13 @@ export default function HistoryLayout() {
           gestureEnabled: true,
         }}
       />
+      <Stack.Screen
+        name="disease/[index]"
+        options={{
+          animation: 'slide_from_right',
+          gestureEnabled: true,
+        }}
+      />
     </Stack>
   );
 }

@@ -9,7 +9,6 @@ import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry, listLibraryEntries } from '@/data/diseaseGuide';
 import { useTabBarInset } from '@/hooks/use-tab-bar-inset';
 import { useHistoryStore } from '@/stores/history-store';
-import { useScanStore } from '@/stores/scan-store';
 
 const HISTORY_LIMIT = 10;
 
@@ -17,7 +16,6 @@ export function HomeScreen() {
   const router = useRouter();
   const tabBarInset = useTabBarInset();
   const items = useHistoryStore((s) => s.items);
-  const loadFromHistory = useScanStore((s) => s.loadFromHistory);
 
   const diseases = useMemo(
     () =>
@@ -36,21 +34,12 @@ export function HomeScreen() {
 
   const recent = items.slice(0, HISTORY_LIMIT);
 
-  const healthyCount = items.filter(
-    (i) => getDiseaseGuideEntry(i.result.predicted_class_index)?.disease_name == null,
-  ).length;
-  const healthyPct = items.length
-    ? Math.round((healthyCount / items.length) * 100)
-    : 0;
-
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={{ paddingBottom: tabBarInset }}
       showsVerticalScrollIndicator={false}>
       <HomeHeader
-        totalScans={items.length}
-        healthyPct={healthyPct}
         onSearch={() => router.push('/(main)/(library)/all')}
         onScan={() => router.push('/(main)/(scan)')}
       />
@@ -106,10 +95,12 @@ export function HomeScreen() {
                 key={item.id}
                 imageUri={item.imageUri}
                 title={`${crop} — ${disease}`}
-                onPress={() => {
-                  loadFromHistory(item.imageUri, item.result);
-                  router.push('/(main)/(scan)/result');
-                }}
+                onPress={() =>
+                  router.push({
+                    pathname: '/(main)/(history)/[id]',
+                    params: { id: item.id },
+                  })
+                }
               />
             );
           })}

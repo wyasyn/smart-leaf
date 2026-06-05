@@ -14,7 +14,6 @@ import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry } from '@/data/diseaseGuide';
 import { useTabBarInset } from '@/hooks/use-tab-bar-inset';
 import { useHistoryStore } from '@/stores/history-store';
-import { useScanStore } from '@/stores/scan-store';
 
 export function HistoryScreen() {
   const router = useRouter();
@@ -22,7 +21,6 @@ export function HistoryScreen() {
   const items = useHistoryStore((s) => s.items);
   const remove = useHistoryStore((s) => s.remove);
   const clear = useHistoryStore((s) => s.clear);
-  const loadFromHistory = useScanStore((s) => s.loadFromHistory);
 
   const cards = items.map((item) => {
     const guide = getDiseaseGuideEntry(item.result.predicted_class_index);
@@ -87,10 +85,10 @@ export function HistoryScreen() {
               imageUri={card.imageUri}
               title={`${card.title}\n${card.subtitle}`}
               onPress={() => {
-                const item = items.find((i) => i.id === card.id);
-                if (!item) return;
-                loadFromHistory(item.imageUri, item.result);
-                router.push('/(main)/(scan)/result');
+                router.push({
+                  pathname: '/(main)/(history)/[id]',
+                  params: { id: card.id },
+                });
               }}
               onLongPress={() => confirmDelete(card.id, card.title)}
             />

@@ -1,5 +1,6 @@
 import { IconCamera } from '@tabler/icons-react-native';
 import { CameraView, useCameraPermissions, type CameraType } from 'expo-camera';
+import { useIsFocused } from 'expo-router';
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
@@ -19,6 +20,7 @@ export function ScanCameraView({
   facing = 'back',
 }: ScanCameraViewProps) {
   const [permission, requestPermission] = useCameraPermissions();
+  const isFocused = useIsFocused();
 
   if (!permission) {
     return <View style={styles.fill} />;
@@ -63,11 +65,24 @@ export function ScanCameraView({
     );
   }
 
-  // The scan tab is kept attached (detachInactiveScreens={false} in the tabs layout),
-  // so this CameraView stays mounted across tab switches and the preview surface is
-  // never destroyed — the camera is live the instant you return, with no white frame.
+  // The scan tab screen stays attached across tab switches (detachInactiveScreens={false}
+  // in the tabs layout), but we only mount CameraView while the tab is focused. Keeping
+  // the native preview surface alive off-screen leaves it with a stale layout on return
+  // (preview pushed up, black at the bottom). Remounting on focus re-measures it cleanly,
+  // and `active` pauses the session on iOS. Expo recommends unmounting the camera while
+  // a screen is unfocused. A black fill stands in while the tab is in the background.
+  if (!isFocused) {
+    return <View style={styles.fill} />;
+  }
+
   return (
-    <CameraView ref={cameraRef} style={styles.fill} facing={facing} zoom={zoom} />
+    <CameraView
+      ref={cameraRef}
+      style={styles.fill}
+      facing={facing}
+      zoom={zoom}
+      active={isFocused}
+    />
   );
 }
 

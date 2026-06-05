@@ -1,5 +1,5 @@
-import { HistoryItemScreen } from '@/components/history/HistoryItemScreen';
+import { ScanDetailScreen } from '@/components/history/ScanDetailScreen';
 
 export default function HistoryItemRoute() {
-  return <HistoryItemScreen />;
+  return <ScanDetailScreen />;
 }

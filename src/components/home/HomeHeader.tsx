@@ -1,12 +1,12 @@
 import { IconScan, IconSearch } from '@tabler/icons-react-native';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/constants/navigation';
 
+const herbPlant = require('../../../assets/images/herb-plant.png');
+
 type HomeHeaderProps = {
-  totalScans: number;
-  healthyPct: number;
   onSearch: () => void;
   onScan: () => void;
 };
@@ -18,48 +18,31 @@ function greeting(): string {
   return 'Good Evening';
 }
 
-export function HomeHeader({
-  totalScans,
-  healthyPct,
-  onSearch,
-  onScan,
-}: HomeHeaderProps) {
+export function HomeHeader({ onSearch, onScan }: HomeHeaderProps) {
   const insets = useSafeAreaInsets();
-  const hasScans = totalScans > 0;
   return (
-    <View style={styles.wrap}>
-      <View style={[styles.card, { paddingTop: insets.top + 16 }]}>
-        <View style={styles.topRow}>
-          <View>
-            <Text style={styles.greeting}>{greeting()}</Text>
-            <Text style={styles.brand}>Smart Leaf</Text>
-          </View>
-          <Pressable style={styles.searchPill} onPress={onSearch} hitSlop={8}>
-            <Text style={styles.searchText}>Search</Text>
-            <IconSearch size={18} color="#FFFFFF" />
-          </Pressable>
+    <View style={[styles.wrap, { paddingTop: insets.top + 16 }]}>
+      <View style={styles.topRow}>
+        <View>
+          <Text style={styles.greeting}>{greeting()}</Text>
+          <Text style={styles.brand}>Smart Leaf</Text>
         </View>
-
-        <Text style={styles.statLabel}>Total Scans</Text>
-        <Text style={styles.statValue}>{totalScans}</Text>
-
-        {hasScans ? (
-          <View style={styles.progressBlock}>
-            <View style={styles.track}>
-              <View style={[styles.fill, { width: `${healthyPct}%` }]} />
-            </View>
-            <Text style={styles.progressCaption}>{healthyPct}% healthy</Text>
-          </View>
-        ) : (
-          <Text style={styles.emptyHint}>Scan a leaf to get started</Text>
-        )}
-
-        <Pressable style={styles.cta} onPress={onScan}>
-          <IconScan size={20} color={colors.primaryDark} />
-          <Text style={styles.ctaText}>Scan a leaf</Text>
+        <Pressable style={styles.searchPill} onPress={onSearch} hitSlop={8}>
+          <Text style={styles.searchText}>Search</Text>
+          <IconSearch size={18} color={colors.textPrimary} />
         </Pressable>
       </View>
-      <View style={styles.pointer} pointerEvents="none" />
+
+      <View style={styles.banner}>
+        <View style={styles.bannerText}>
+          <Text style={styles.bannerTitle}>Grow healthy plants,{'\n'}one scan at a time.</Text>
+          <Pressable style={styles.cta} onPress={onScan}>
+            <IconScan size={18} color="#FFFFFF" />
+            <Text style={styles.ctaText}>Scan leaf</Text>
+          </Pressable>
+        </View>
+        <Image source={herbPlant} style={styles.bannerImage} resizeMode="contain" />
+      </View>
     </View>
   );
 }
@@ -67,27 +50,8 @@ export function HomeHeader({
 const styles = StyleSheet.create({
   wrap: {
     marginBottom: 28,
-    alignItems: 'center',
-  },
-  card: {
-    width: '100%',
-    backgroundColor: colors.primary,
-    borderBottomLeftRadius: 28,
-    borderBottomRightRadius: 28,
     paddingHorizontal: 20,
-    paddingBottom: 24,
-  },
-  pointer: {
-    position: 'absolute',
-    bottom: -15,
-    width: 0,
-    height: 0,
-    borderLeftWidth: 26,
-    borderRightWidth: 26,
-    borderTopWidth: 16,
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderTopColor: colors.primary,
+    backgroundColor: colors.screenBackground,
   },
   topRow: {
     flexDirection: 'row',
@@ -97,13 +61,13 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.85)',
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   brand: {
     fontSize: 22,
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: colors.textPrimary,
     marginTop: 2,
   },
   searchPill: {
@@ -114,63 +78,53 @@ const styles = StyleSheet.create({
     paddingRight: 14,
     height: 40,
     borderRadius: 999,
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
+    backgroundColor: '#FFFFFF',
   },
   searchText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#FFFFFF',
+    color: colors.textPrimary,
   },
-  statLabel: {
-    fontSize: 13,
-    color: 'rgba(255, 255, 255, 0.8)',
-    fontWeight: '500',
+  banner: {
+    position: 'relative',
+    backgroundColor: 'rgba(61, 187, 110, 0.12)',
+    borderRadius: 24,
+    paddingLeft: 22,
+    paddingRight: 150,
+    minHeight: 150,
+    justifyContent: 'center',
   },
-  statValue: {
-    fontSize: 40,
-    fontWeight: '800',
-    color: '#FFFFFF',
-    marginTop: 2,
-    marginBottom: 16,
+  bannerText: {
+    paddingVertical: 22,
   },
-  progressBlock: {
-    gap: 6,
-  },
-  track: {
-    height: 8,
-    borderRadius: 999,
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-    overflow: 'hidden',
-  },
-  fill: {
-    height: '100%',
-    borderRadius: 999,
-    backgroundColor: '#FFFFFF',
-  },
-  progressCaption: {
-    fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.85)',
-    fontWeight: '500',
-    alignSelf: 'flex-end',
-  },
-  emptyHint: {
-    fontSize: 13,
-    color: 'rgba(255, 255, 255, 0.85)',
-    fontWeight: '500',
+  bannerTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: colors.textPrimary,
+    lineHeight: 26,
+    marginBottom: 18,
   },
   cta: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
-    marginTop: 20,
-    height: 50,
-    borderRadius: 16,
-    backgroundColor: '#FFFFFF',
+    gap: 6,
+    alignSelf: 'flex-start',
+    paddingHorizontal: 18,
+    height: 42,
+    borderRadius: 999,
+    backgroundColor: colors.primary,
   },
   ctaText: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '700',
-    color: colors.primaryDark,
+    color: '#FFFFFF',
+  },
+  bannerImage: {
+    position: 'absolute',
+    right: 8,
+    bottom: 0,
+    width: 150,
+    height: 196,
   },
 });
