@@ -62,12 +62,6 @@
         {
           "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to pick plant images."
         }
-      ],
-      [
-        "expo-document-picker",
-        {
-          "iCloudContainerEnvironment": "Production"
-        }
       ]
     ],
     "experiments": {
