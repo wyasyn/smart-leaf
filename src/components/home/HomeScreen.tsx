@@ -7,6 +7,7 @@ import { HomeSection, HorizontalCard } from '@/components/home/HorizontalCard';
 import { riskColor } from '@/constants/diagnosis';
 import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry, listLibraryEntries } from '@/data/diseaseGuide';
+import { getDiseaseHeroImage } from '@/data/disease_hero_images';
 import { useTabBarInset } from '@/hooks/use-tab-bar-inset';
 import { useHistoryStore } from '@/stores/history-store';
 
@@ -26,7 +27,7 @@ export function HomeScreen() {
           id: item.id,
           index: item.index,
           name: entry!.disease_name as string,
-          image: entry!.image_urls?.[0],
+          image: getDiseaseHeroImage(item.index) ?? entry!.image_urls?.[0],
           risk: entry!.risk_level,
         })),
     [],
@@ -56,7 +57,7 @@ export function HomeScreen() {
         {diseases.map((d) => (
           <HorizontalCard
             key={d.id}
-            imageUri={d.image}
+            image={d.image}
             title={d.name}
             badge={d.risk}
             badgeColor={riskColor(d.risk)}
@@ -93,7 +94,7 @@ export function HomeScreen() {
             return (
               <HorizontalCard
                 key={item.id}
-                imageUri={item.imageUri}
+                image={item.imageUri}
                 title={`${crop} — ${disease}`}
                 onPress={() =>
                   router.push({

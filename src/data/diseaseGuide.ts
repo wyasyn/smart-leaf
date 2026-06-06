@@ -1,26 +1,13 @@
-import diseaseGuideJson from '@/assets/data/disease_guide.json';
 import classNames from '@/assets/models/class_names.json';
+import {
+  diseaseGuideData,
+  type DiseaseGuideEntry,
+} from '@/data/disease_guide_data';
 import { NOT_A_LEAF_LABEL } from '@/ml/constants';
 
-export type DiseaseGuideEntry = {
-  disease_name: string | null;
-  common_names: string[];
-  crop: string;
-  description: string;
-  symptoms: string[];
-  cause: string | null;
-  treatment: string[];
-  prevention: string[];
-  image_urls: string[];
-  management_tips: string;
-  risk_level: string;
-  sprayer_intervals: string;
-  localized_tips: string;
-  type: string;
-  external_resources: { title: string; url: string }[];
-};
+export type { DiseaseGuideEntry, DiseaseMarkdown } from '@/data/disease_guide_data';
 
-const guide = diseaseGuideJson as Record<string, DiseaseGuideEntry>;
+const guide = diseaseGuideData;
 
 export function getDiseaseGuideEntry(
   classIndex: number,

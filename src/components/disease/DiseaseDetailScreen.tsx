@@ -2,7 +2,7 @@ import { IconArrowLeft, IconLeaf } from '@tabler/icons-react-native';
 import { BlurView } from 'expo-blur';
 import { Image } from 'expo-image';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import {
   Linking,
   Platform,
@@ -12,14 +12,19 @@ import {
   Text,
   View,
 } from 'react-native';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { Markdown } from '@/components/common/Markdown';
 import { riskColor } from '@/constants/diagnosis';
 import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry } from '@/data/diseaseGuide';
-
-/** Offline-first: remote galleries and links are hidden until online support is added. */
-const SHOW_ONLINE_CONTENT = false;
+import { getDiseaseHeroImage } from '@/data/disease_hero_images';
 
 function Section({
   title,
@@ -37,16 +42,13 @@ function Section({
   );
 }
 
-function BulletList({ items }: { items: string[] }) {
-  if (!items.length) return null;
+/** Render a Markdown section, hidden when the content is empty. */
+function MarkdownSection({ title, value }: { title: string; value: string }) {
+  if (!value?.trim()) return null;
   return (
-    <View style={styles.bulletList}>
-      {items.map((item, i) => (
-        <Text key={`${i}-${item.slice(0, 12)}`} style={styles.body}>
-          • {item}
-        </Text>
-      ))}
-    </View>
+    <Section title={title}>
+      <Markdown value={value} />
+    </Section>
   );
 }
 
@@ -61,6 +63,19 @@ export function DiseaseDetailScreen() {
   const entry = Number.isFinite(classIndex)
     ? getDiseaseGuideEntry(classIndex)
     : undefined;
+
+  // The card grid uses the same bundled image, so it is already cached here.
+  // A gentle zoom-settle makes it read as the card image growing into the hero.
+  const heroScale = useSharedValue(1.12);
+  useEffect(() => {
+    heroScale.value = withTiming(1, {
+      duration: 340,
+      easing: Easing.out(Easing.cubic),
+    });
+  }, [heroScale]);
+  const heroAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: heroScale.value }],
+  }));
 
   const BackButton = (
     <Pressable
@@ -89,7 +104,14 @@ export function DiseaseDetailScreen() {
   const title = isHealthy
     ? `${entry.crop} — Healthy`
     : `${entry.crop} — ${entry.disease_name}`;
-  const heroUri = entry.image_urls[0];
+  // Prefer the bundled (offline) hero; fall back to the first remote image.
+  const localHero = getDiseaseHeroImage(classIndex);
+  const heroSource =
+    localHero != null
+      ? localHero
+      : entry.image_urls[0]
+        ? { uri: entry.image_urls[0] }
+        : null;
 
   return (
     <View style={styles.scroll}>
@@ -97,13 +119,15 @@ export function DiseaseDetailScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}>
         <View style={styles.hero}>
-          {heroUri ? (
-            <Image
-              source={{ uri: heroUri }}
-              style={StyleSheet.absoluteFill}
-              contentFit="cover"
-              transition={200}
-            />
+          {heroSource ? (
+            <Animated.View style={[StyleSheet.absoluteFill, heroAnimStyle]}>
+              <Image
+                source={heroSource}
+                style={StyleSheet.absoluteFill}
+                contentFit="cover"
+                transition={200}
+              />
+            </Animated.View>
           ) : (
             <View style={styles.heroPlaceholder}>
               <IconLeaf size={64} color={colors.primary} />
@@ -134,6 +158,10 @@ export function DiseaseDetailScreen() {
             </View>
           ) : null}
 
+          {entry.scientific_name ? (
+            <Text style={styles.metaScientific}>{entry.scientific_name}</Text>
+          ) : null}
+
           {isHealthy ? (
             <View style={[styles.healthyBanner, { borderColor: riskColor('Low') }]}>
               <Text style={styles.healthyTitle}>No disease detected</Text>
@@ -141,63 +169,37 @@ export function DiseaseDetailScreen() {
             </View>
           ) : null}
 
-          <Section title="Description">
-            <Text style={styles.body}>{entry.description}</Text>
-          </Section>
+          <MarkdownSection title="Overview" value={entry.md.overview} />
+          <MarkdownSection
+            title={isHealthy ? 'What healthy looks like' : 'Symptoms'}
+            value={entry.md.symptoms}
+          />
+          <MarkdownSection title="Conditions that favour it" value={entry.md.favorable} />
+          <MarkdownSection
+            title={isHealthy ? 'Keeping it healthy' : 'Management & control'}
+            value={entry.md.management}
+          />
+          <MarkdownSection title="Prevention" value={entry.md.prevention} />
+          <MarkdownSection title="In Uganda" value={entry.md.uganda_notes} />
 
-          {!isHealthy && entry.cause ? (
-            <Section title="Cause">
-              <Text style={styles.body}>{entry.cause}</Text>
-            </Section>
-          ) : null}
-
-          <Section title="Symptoms">
-            <BulletList items={entry.symptoms} />
-          </Section>
-
-          <Section title="Treatment">
-            <BulletList items={entry.treatment} />
-          </Section>
-
-          <Section title="Prevention">
-            <BulletList items={entry.prevention} />
-          </Section>
-
-          {entry.management_tips ? (
-            <Section title="Management tips">
-              <Text style={styles.body}>{entry.management_tips}</Text>
-            </Section>
-          ) : null}
-
-          {entry.sprayer_intervals ? (
-            <Section title="Sprayer intervals">
-              <Text style={styles.body}>{entry.sprayer_intervals}</Text>
-            </Section>
-          ) : null}
-
-          {entry.localized_tips ? (
-            <Section title="Localized tips">
-              <Text style={styles.body}>{entry.localized_tips}</Text>
-            </Section>
-          ) : null}
-
-          {SHOW_ONLINE_CONTENT && entry.image_urls.length > 0 ? (
-            <Section title="Images">
+          {entry.image_urls.length > 1 ? (
+            <Section title="More images">
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {entry.image_urls.map((url) => (
+                {entry.image_urls.slice(1).map((url) => (
                   <Image
                     key={url}
                     source={{ uri: url }}
                     style={styles.galleryImage}
                     contentFit="cover"
+                    transition={200}
                   />
                 ))}
               </ScrollView>
             </Section>
           ) : null}
 
-          {SHOW_ONLINE_CONTENT && entry.external_resources.length > 0 ? (
-            <Section title="External resources">
+          {entry.external_resources.length > 0 ? (
+            <Section title="Learn more">
               {entry.external_resources.map((r) => (
                 <Pressable key={r.url} onPress={() => Linking.openURL(r.url)}>
                   <Text style={styles.link}>{r.title}</Text>
@@ -279,6 +281,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textSecondary,
   },
+  metaScientific: {
+    fontSize: 14,
+    fontStyle: 'italic',
+    color: colors.textSecondary,
+  },
   chipsRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -327,9 +334,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '600',
     color: colors.textPrimary,
-  },
-  bulletList: {
-    gap: 6,
   },
   link: {
     color: colors.primary,

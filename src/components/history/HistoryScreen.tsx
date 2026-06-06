@@ -82,7 +82,7 @@ export function HistoryScreen() {
             <HorizontalCard
               key={card.id}
               style={styles.card}
-              imageUri={card.imageUri}
+              image={card.imageUri}
               title={`${card.title}\n${card.subtitle}`}
               onPress={() => {
                 router.push({

@@ -11,6 +11,7 @@ import {
   filterLibraryEntries,
   getDiseaseGuideEntry,
 } from '@/data/diseaseGuide';
+import { getDiseaseHeroImage } from '@/data/disease_hero_images';
 import { useTabBarInset } from '@/hooks/use-tab-bar-inset';
 
 const RISK_FILTERS = ['All', 'High', 'Medium', 'Low'] as const;
@@ -36,7 +37,7 @@ export function LibraryScreen() {
           id: item.id,
           title: item.title,
           risk: item.risk_level,
-          image: entry?.image_urls?.[0],
+          image: getDiseaseHeroImage(item.index) ?? entry?.image_urls?.[0],
         };
       }),
     [debouncedQuery, riskFilter],
@@ -100,7 +101,7 @@ export function LibraryScreen() {
       renderItem={({ item }) => (
         <HorizontalCard
           style={styles.card}
-          imageUri={item.image}
+          image={item.image}
           title={item.title}
           badge={item.risk}
           badgeColor={riskColor(item.risk)}

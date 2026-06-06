@@ -16,7 +16,9 @@ export default function HistoryLayout() {
       <Stack.Screen
         name="disease/[index]"
         options={{
-          animation: 'slide_from_right',
+          // Fade so the hero's zoom-settle reads as the card image growing
+          // into the detail hero (cards use the same bundled image).
+          animation: 'fade',
           gestureEnabled: true,
         }}
       />

@@ -8,7 +8,8 @@ import { colors } from '@/constants/navigation';
 export const CARD_WIDTH = 152;
 
 type HorizontalCardProps = {
-  imageUri?: string;
+  /** A bundled image (require id, number) or a remote/local URI string. */
+  image?: number | string;
   title: string;
   badge?: string;
   badgeColor?: string;
@@ -18,7 +19,7 @@ type HorizontalCardProps = {
 };
 
 export function HorizontalCard({
-  imageUri,
+  image,
   title,
   badge,
   badgeColor,
@@ -26,15 +27,17 @@ export function HorizontalCard({
   onLongPress,
   style,
 }: HorizontalCardProps) {
+  const source =
+    typeof image === 'number' ? image : image ? { uri: image } : undefined;
   return (
     <Pressable style={[styles.card, style]} onPress={onPress} onLongPress={onLongPress}>
       <View style={styles.imageWrap}>
         <View style={styles.placeholder}>
           <IconLeaf size={32} color={colors.iconActive} />
         </View>
-        {imageUri ? (
+        {source ? (
           <Image
-            source={{ uri: imageUri }}
+            source={source}
             style={StyleSheet.absoluteFill}
             contentFit="cover"
             transition={200}
