@@ -57,7 +57,7 @@ export function ScanScreen() {
   const reset = useScanStore((s) => s.reset);
   const activeImage = useActiveScanImage();
 
-  const { model, state: modelState } = useSmartLeafModel();
+  const { model, state: modelState, reload: reloadModel } = useSmartLeafModel();
   const confThresholdOverride = useSettingsStore((s) => s.confThresholdOverride);
 
   // Reset scan state when leaving the scan tab, not when pushing stack screens.
@@ -172,6 +172,8 @@ export function ScanScreen() {
           onAnalyze={handleAnalyze}
           onRetake={retake}
           onRemove={removeActiveImage}
+          modelLoaded={modelState === 'loaded'}
+          onReloadModel={reloadModel}
           zoom={zoom}
           zoomPresets={zoomPresets}
           onZoomChange={setZoom}

@@ -61,7 +61,8 @@
         {
           "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to pick plant images."
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,

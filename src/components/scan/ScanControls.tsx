@@ -2,6 +2,7 @@ import {
   IconCameraRotate,
   IconPhoto,
   IconRefresh,
+  IconReload,
   IconTrash,
   IconZoomScan,
 } from '@tabler/icons-react-native';
@@ -26,6 +27,9 @@ type ScanControlsProps = {
   onAnalyze: () => void;
   onRetake: () => void;
   onRemove: () => void;
+  /** Whether the ML model is ready. When false (preview phase), a reload button appears. */
+  modelLoaded?: boolean;
+  onReloadModel?: () => void;
   // Zoom
   zoom: number;
   zoomPresets: ZoomPreset[];
@@ -35,6 +39,7 @@ type ScanControlsProps = {
 };
 
 const DESTRUCTIVE = '#DC2626';
+const WARNING = '#D97706';
 
 // Shutter geometry (matches the FAB it replaces): 64px box, 20px from the right.
 const SHUTTER_SIZE = 64;
@@ -89,6 +94,8 @@ export function ScanControls({
   onAnalyze,
   onRetake,
   onRemove,
+  modelLoaded = true,
+  onReloadModel,
   zoom,
   zoomPresets,
   onZoomChange,
@@ -123,6 +130,19 @@ export function ScanControls({
           },
         ]
       : [
+          // Recovery action: only surfaces when the model isn't ready. When the
+          // model is active this entry is omitted, so the button simply isn't there.
+          ...(!modelLoaded && onReloadModel
+            ? [
+                {
+                  key: 'reload-model',
+                  icon: IconReload,
+                  label: 'Reload model',
+                  onPress: onReloadModel,
+                  tint: WARNING,
+                },
+              ]
+            : []),
           {
             key: 'retake',
             icon: IconRefresh,
@@ -148,7 +168,9 @@ export function ScanControls({
           <Text style={styles.hintText}>
             {phase === 'camera'
               ? 'Point at a leaf, then tap to capture'
-              : 'Tap the green button to detect disease'}
+              : modelLoaded
+                ? 'Tap the green button to detect disease'
+                : 'Model not ready — tap the orange button to reload'}
           </Text>
         </View>
       ) : null}

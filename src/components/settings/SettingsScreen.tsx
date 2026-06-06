@@ -4,18 +4,28 @@ import {
   IconLanguage,
   IconMinus,
   IconPlus,
+  IconReload,
   IconStack2,
   IconTargetArrow,
   IconTrash,
   IconWifiOff,
 } from '@tabler/icons-react-native';
 import type { ReactNode } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 import inferConfig from '@/assets/models/infer_config.json';
 import { colors } from '@/constants/navigation';
 import { CLASS_COUNT } from '@/data/diseaseGuide';
 import { MODEL_VERSION } from '@/ml/inference';
+import { useSmartLeafModel } from '@/ml/SmartLeafModelProvider';
 import { useHistoryStore } from '@/stores/history-store';
 import { useSettingsStore } from '@/stores/settings-store';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -33,6 +43,7 @@ export function SettingsScreen() {
   const language = useSettingsStore((s) => s.language);
   const historyCount = useHistoryStore((s) => s.items.length);
   const clearHistory = useHistoryStore((s) => s.clear);
+  const { state: modelState, reload: reloadModel } = useSmartLeafModel();
 
   const effectiveThreshold = confOverride ?? inferConfig.conf_threshold;
   const isDefaultThreshold = confOverride == null;
@@ -90,8 +101,8 @@ export function SettingsScreen() {
             icon={<IconDeviceMobile size={ICON_SIZE} color={colors.iconActive} />}
             label="Inference"
             detail="On-device (offline)"
-            isLast
           />
+          <ModelStatusRow state={modelState} onReload={reloadModel} />
         </View>
 
         <SectionHeader title="Detection" />
@@ -183,6 +194,64 @@ export function SettingsScreen() {
 
 function SectionHeader({ title }: { title: string }) {
   return <Text style={styles.sectionHeader}>{title}</Text>;
+}
+
+const STATUS_META: Record<
+  'loading' | 'loaded' | 'error',
+  { dot: string; label: string; detail: string }
+> = {
+  loaded: {
+    dot: '#16A34A',
+    label: 'Active',
+    detail: 'Model loaded and ready',
+  },
+  loading: {
+    dot: '#D97706',
+    label: 'Loading…',
+    detail: 'Preparing the model',
+  },
+  error: {
+    dot: '#DC2626',
+    label: 'Unavailable',
+    detail: 'Failed to load — tap reload',
+  },
+};
+
+function ModelStatusRow({
+  state,
+  onReload,
+}: {
+  state: 'loading' | 'loaded' | 'error';
+  onReload: () => void;
+}) {
+  const meta = STATUS_META[state];
+  return (
+    <View style={[styles.row, styles.rowLast]}>
+      <View style={styles.iconWrap}>
+        <View style={[styles.statusDot, { backgroundColor: meta.dot }]} />
+      </View>
+      <View style={styles.rowBody}>
+        <Text style={styles.rowLabel}>Status</Text>
+        <Text style={styles.rowDetail}>
+          {meta.label} · {meta.detail}
+        </Text>
+      </View>
+      {state === 'loading' ? (
+        <ActivityIndicator size="small" color={colors.iconActive} />
+      ) : state === 'error' ? (
+        <Pressable
+          style={({ pressed }) => [
+            styles.reloadBtn,
+            pressed && styles.stepBtnPressed,
+          ]}
+          onPress={onReload}
+          hitSlop={6}>
+          <IconReload size={16} color={colors.textPrimary} strokeWidth={2.2} />
+          <Text style={styles.reloadBtnText}>Reload</Text>
+        </Pressable>
+      ) : null}
+    </View>
+  );
 }
 
 function SettingsInfoRow({
@@ -336,6 +405,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#DC2626',
+  },
+  statusDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+  },
+  reloadBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    height: 34,
+    paddingHorizontal: 14,
+    borderRadius: 10,
+    backgroundColor: '#F3F4F6',
+  },
+  reloadBtnText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.textPrimary,
   },
   footer: {
     textAlign: 'center',

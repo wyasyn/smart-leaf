@@ -1,3 +1,6 @@
 allowBuilds:
   msgpackr-extract: false
   unrs-resolver: false
+minimumReleaseAgeExclude:
+  - expo-asset@56.0.16
+  - expo-constants@56.0.17
