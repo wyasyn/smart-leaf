@@ -4,8 +4,8 @@
     224
   ],
   "input_range": "[0,255] raw RGB",
-  "temperature": 1.05,
+  "temperature": 1.0,
   "conf_threshold": 0.6,
   "entropy_frac": 0.55,
-  "num_classes": 38
+  "num_classes": 39
 }
