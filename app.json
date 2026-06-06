@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "smart leaf",
-    "slug": "smartleaf",
+    "slug": "smart-leaf",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/adaptive-icon.png",
