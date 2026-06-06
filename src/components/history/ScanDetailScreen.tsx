@@ -6,7 +6,7 @@ import {
 } from '@tabler/icons-react-native';
 import { BlurView } from 'expo-blur';
 import { Image } from 'expo-image';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter, useSegments } from 'expo-router';
 import {
   Alert,
   Platform,
@@ -19,6 +19,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { confidenceChipColor, riskColor } from '@/constants/diagnosis';
+import { CARD_IMAGE_BLURHASH } from '@/constants/images';
 import { colors } from '@/constants/navigation';
 import { getDiseaseGuideEntry } from '@/data/diseaseGuide';
 import { NOT_A_LEAF_MESSAGE, NOT_A_LEAF_VERDICT } from '@/ml/constants';
@@ -28,6 +29,10 @@ import { useHistoryStore } from '@/stores/history-store';
 export function ScanDetailScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const segments = useSegments();
+  // Stay inside whichever tab stack hosts this screen so the back gesture
+  // returns to where the scan was opened from (home vs. history list).
+  const inLibrary = segments[1] === '(library)';
   const { id } = useLocalSearchParams<{ id: string }>();
   const item = useHistoryStore((s) => s.items.find((i) => i.id === id));
   const remove = useHistoryStore((s) => s.remove);
@@ -70,7 +75,9 @@ export function ScanDetailScreen() {
 
   const handleViewDisease = () => {
     router.push({
-      pathname: '/(main)/(history)/disease/[index]',
+      pathname: inLibrary
+        ? '/(main)/(library)/disease/[index]'
+        : '/(main)/(history)/disease/[index]',
       params: { index: String(result.predicted_class_index) },
     });
   };
@@ -100,7 +107,9 @@ export function ScanDetailScreen() {
               source={{ uri: imageUri }}
               style={StyleSheet.absoluteFill}
               contentFit="cover"
-              transition={200}
+              placeholder={{ blurhash: CARD_IMAGE_BLURHASH }}
+              placeholderContentFit="cover"
+              transition={300}
             />
           ) : (
             <View style={styles.heroPlaceholder}>
@@ -207,7 +216,7 @@ const styles = StyleSheet.create({
   hero: {
     width: '100%',
     aspectRatio: 4 / 5,
-    backgroundColor: colors.activeIconBackground,
+    backgroundColor: '#E5E7EB',
     borderBottomLeftRadius: 28,
     borderBottomRightRadius: 28,
     overflow: 'hidden',

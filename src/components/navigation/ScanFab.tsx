@@ -12,7 +12,11 @@ export function ScanFab({ isFocused, ...props }: ScanFabProps) {
   return (
     <Pressable
       {...props}
-      style={[styles.fab, isFocused && styles.fabFocused]}
+      style={({ pressed }) => [
+        styles.fab,
+        isFocused && styles.fabFocused,
+        pressed && styles.fabPressed,
+      ]}
       accessibilityRole="button"
       accessibilityLabel="Scan">
       <View style={styles.inner}>
@@ -38,6 +42,10 @@ const styles = StyleSheet.create({
   },
   fabFocused: {
     backgroundColor: colors.primaryDark,
+  },
+  fabPressed: {
+    backgroundColor: colors.primaryDark,
+    transform: [{ scale: 0.94 }],
   },
   inner: {
     alignItems: 'center',

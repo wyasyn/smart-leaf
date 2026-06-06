@@ -22,6 +22,20 @@ export default function LibraryLayout() {
           gestureEnabled: true,
         }}
       />
+      <Stack.Screen
+        name="scan/[id]"
+        options={{
+          animation: 'slide_from_right',
+          gestureEnabled: true,
+        }}
+      />
+      <Stack.Screen
+        name="disease/[index]"
+        options={{
+          animation: 'fade',
+          gestureEnabled: true,
+        }}
+      />
     </Stack>
   );
 }

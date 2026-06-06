@@ -1,5 +1,5 @@
 import { IconArrowLeft, IconSearch } from '@tabler/icons-react-native';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -19,6 +19,9 @@ const RISK_FILTERS = ['All', 'High', 'Medium', 'Low'] as const;
 export function LibraryScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  // Set only when arriving from the home search button, so the input focuses
+  // automatically — but not when the library is opened any other way.
+  const { focus } = useLocalSearchParams<{ focus?: string }>();
   const tabBarInset = useTabBarInset();
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -74,6 +77,7 @@ export function LibraryScreen() {
               value={query}
               onChangeText={setQuery}
               returnKeyType="search"
+              autoFocus={focus === '1'}
             />
           </View>
 

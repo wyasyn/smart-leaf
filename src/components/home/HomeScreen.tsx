@@ -1,6 +1,7 @@
+import { IconLeaf, IconScan } from '@tabler/icons-react-native';
 import { useRouter } from 'expo-router';
 import { useMemo } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { HomeHeader } from '@/components/home/HomeHeader';
 import { HomeSection, HorizontalCard } from '@/components/home/HorizontalCard';
@@ -41,7 +42,12 @@ export function HomeScreen() {
       contentContainerStyle={{ paddingBottom: tabBarInset }}
       showsVerticalScrollIndicator={false}>
       <HomeHeader
-        onSearch={() => router.push('/(main)/(library)/all')}
+        onSearch={() =>
+          router.push({
+            pathname: '/(main)/(library)/all',
+            params: { focus: '1' },
+          })
+        }
         onScan={() => router.push('/(main)/(scan)')}
       />
 
@@ -77,7 +83,20 @@ export function HomeScreen() {
       />
       {recent.length === 0 ? (
         <View style={styles.emptyCard}>
-          <Text style={styles.emptyText}>No scans yet — tap scan to start</Text>
+          <View style={styles.emptyIcon}>
+            <IconLeaf size={24} color={colors.primary} />
+          </View>
+          <View style={styles.emptyTextWrap}>
+            <Text style={styles.emptyTitle}>No scans yet</Text>
+            <Text style={styles.emptyText}>Tap scan to diagnose your first leaf.</Text>
+          </View>
+          <Pressable
+            style={({ pressed }) => [styles.emptyCta, pressed && styles.emptyCtaPressed]}
+            onPress={() => router.push('/(main)/(scan)')}
+            hitSlop={6}>
+            <IconScan size={16} color="#FFFFFF" />
+            <Text style={styles.emptyCtaText}>Scan</Text>
+          </Pressable>
         </View>
       ) : (
         <ScrollView
@@ -98,7 +117,7 @@ export function HomeScreen() {
                 title={`${crop} — ${disease}`}
                 onPress={() =>
                   router.push({
-                    pathname: '/(main)/(history)/[id]',
+                    pathname: '/(main)/(library)/scan/[id]',
                     params: { id: item.id },
                   })
                 }
@@ -124,16 +143,52 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   emptyCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
     marginHorizontal: 16,
     marginBottom: 28,
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
-    paddingVertical: 28,
+    paddingVertical: 18,
+    paddingHorizontal: 16,
+  },
+  emptyIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: 999,
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.activeIconBackground,
+  },
+  emptyTextWrap: {
+    flex: 1,
+    gap: 2,
+  },
+  emptyTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: colors.textPrimary,
   },
   emptyText: {
-    fontSize: 14,
+    fontSize: 13,
     color: colors.textSecondary,
-    fontWeight: '500',
+  },
+  emptyCta: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 16,
+    height: 38,
+    borderRadius: 999,
+    backgroundColor: colors.primary,
+  },
+  emptyCtaPressed: {
+    backgroundColor: colors.primaryDark,
+  },
+  emptyCtaText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#FFFFFF',
   },
 });

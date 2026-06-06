@@ -1,7 +1,7 @@
 import classNames from '@/assets/models/class_names.json';
 import {
-  diseaseGuideData,
-  type DiseaseGuideEntry,
+    diseaseGuideData,
+    type DiseaseGuideEntry,
 } from '@/data/disease_guide_data';
 import { NOT_A_LEAF_LABEL } from '@/ml/constants';
 

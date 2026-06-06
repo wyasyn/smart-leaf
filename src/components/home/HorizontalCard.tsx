@@ -3,6 +3,7 @@ import { Image } from 'expo-image';
 import type { StyleProp, ViewStyle } from 'react-native';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { CARD_IMAGE_BLURHASH } from '@/constants/images';
 import { colors } from '@/constants/navigation';
 
 export const CARD_WIDTH = 152;
@@ -30,19 +31,25 @@ export function HorizontalCard({
   const source =
     typeof image === 'number' ? image : image ? { uri: image } : undefined;
   return (
-    <Pressable style={[styles.card, style]} onPress={onPress} onLongPress={onLongPress}>
+    <Pressable
+      style={({ pressed }) => [styles.card, style, pressed && styles.cardPressed]}
+      onPress={onPress}
+      onLongPress={onLongPress}>
       <View style={styles.imageWrap}>
-        <View style={styles.placeholder}>
-          <IconLeaf size={32} color={colors.iconActive} />
-        </View>
         {source ? (
           <Image
             source={source}
             style={StyleSheet.absoluteFill}
             contentFit="cover"
-            transition={200}
+            placeholder={{ blurhash: CARD_IMAGE_BLURHASH }}
+            placeholderContentFit="cover"
+            transition={300}
           />
-        ) : null}
+        ) : (
+          <View style={styles.placeholder}>
+            <IconLeaf size={32} color={colors.iconActive} />
+          </View>
+        )}
         {badge ? (
           <View style={[styles.badge, { backgroundColor: badgeColor ?? colors.primary }]}>
             <Text style={styles.badgeText}>{badge}</Text>
@@ -66,7 +73,10 @@ export function HomeSection({ title, onSeeAll }: HomeSectionProps) {
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{title}</Text>
       {onSeeAll ? (
-        <Pressable style={styles.seeAll} onPress={onSeeAll} hitSlop={8}>
+        <Pressable
+          style={({ pressed }) => [styles.seeAll, pressed && styles.seeAllPressed]}
+          onPress={onSeeAll}
+          hitSlop={8}>
           <Text style={styles.seeAllText}>See all</Text>
           <IconChevronRight size={16} color={colors.primaryDark} />
         </Pressable>
@@ -79,12 +89,15 @@ const styles = StyleSheet.create({
   card: {
     width: CARD_WIDTH,
   },
+  cardPressed: {
+    opacity: 0.7,
+  },
   imageWrap: {
     width: '100%',
     aspectRatio: 3 / 4,
     borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: colors.activeIconBackground,
+    backgroundColor: '#E5E7EB',
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.12,
@@ -137,6 +150,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 2,
+  },
+  seeAllPressed: {
+    opacity: 0.6,
   },
   seeAllText: {
     fontSize: 14,

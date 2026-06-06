@@ -5,7 +5,7 @@ import {
   IconTrash,
   IconZoomScan,
 } from '@tabler/icons-react-native';
-import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { tabBarBottomPadding } from '@/constants/navigation';
@@ -143,6 +143,16 @@ export function ScanControls({
 
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
+      {!busy ? (
+        <View style={[styles.hint, { top: insets.top + 12 }]} pointerEvents="none">
+          <Text style={styles.hintText}>
+            {phase === 'camera'
+              ? 'Point at a leaf, then tap to capture'
+              : 'Tap the green button to detect disease'}
+          </Text>
+        </View>
+      ) : null}
+
       {phase === 'camera' && zoomVisible && zoomPresets.length > 1 ? (
         <View style={[styles.zoom, { bottom: bottomPad + radius + 72 }]}>
           <ScanZoomPill presets={zoomPresets} zoom={zoom} onChange={onZoomChange} />
@@ -189,5 +199,21 @@ const styles = StyleSheet.create({
   zoom: {
     position: 'absolute',
     right: 16,
+  },
+  hint: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
+  hintText: {
+    overflow: 'hidden',
+    borderRadius: 999,
+    backgroundColor: 'rgba(0, 0, 0, 0.55)',
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '600',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
 });

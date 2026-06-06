@@ -1,4 +1,6 @@
 import { IconScan, IconSearch } from '@tabler/icons-react-native';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -20,11 +22,21 @@ function greeting(): string {
 
 export function HomeHeader({ onSearch, onScan }: HomeHeaderProps) {
   const insets = useSafeAreaInsets();
+  const [message, setMessage] = useState(greeting);
+
+  // Recompute the greeting whenever the home screen regains focus so it stays
+  // accurate across time-of-day boundaries while the app is left open.
+  useFocusEffect(
+    useCallback(() => {
+      setMessage(greeting());
+    }, []),
+  );
+
   return (
     <View style={[styles.wrap, { paddingTop: insets.top + 16 }]}>
       <View style={styles.topRow}>
         <View>
-          <Text style={styles.greeting}>{greeting()}</Text>
+          <Text style={styles.greeting}>{message}</Text>
           <Text style={styles.brand}>Smart Leaf</Text>
         </View>
         <Pressable style={styles.searchPill} onPress={onSearch} hitSlop={8}>

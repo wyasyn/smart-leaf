@@ -1,4 +1,16 @@
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  IconCpu,
+  IconDeviceMobile,
+  IconLanguage,
+  IconMinus,
+  IconPlus,
+  IconStack2,
+  IconTargetArrow,
+  IconTrash,
+  IconWifiOff,
+} from '@tabler/icons-react-native';
+import type { ReactNode } from 'react';
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import inferConfig from '@/assets/models/infer_config.json';
 import { colors } from '@/constants/navigation';
@@ -12,6 +24,8 @@ const THRESHOLD_MIN = 0.5;
 const THRESHOLD_MAX = 0.9;
 const THRESHOLD_STEP = 0.05;
 
+const ICON_SIZE = 20;
+
 export function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const confOverride = useSettingsStore((s) => s.confThresholdOverride);
@@ -21,6 +35,7 @@ export function SettingsScreen() {
   const clearHistory = useHistoryStore((s) => s.clear);
 
   const effectiveThreshold = confOverride ?? inferConfig.conf_threshold;
+  const isDefaultThreshold = confOverride == null;
 
   const handleClearHistory = () => {
     if (historyCount === 0) {
@@ -54,71 +69,140 @@ export function SettingsScreen() {
   };
 
   return (
-    <View style={[styles.container, { paddingBottom: insets.bottom, paddingTop: insets.top }]}>
+    <View style={[styles.container, { paddingTop: insets.top }]}>
       <Text style={styles.title}>Settings</Text>
-      <View style={styles.listWrap}>
-        <SettingsInfoRow label="Model" detail={MODEL_VERSION} />
-        <SettingsInfoRow label="Classes" detail={String(CLASS_COUNT)} />
-        <SettingsInfoRow label="Inference" detail="On-device (offline)" />
-        <SettingsInfoRow label="Language" detail={language} isLast={false} />
+      <ScrollView
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 24 }]}
+        showsVerticalScrollIndicator={false}>
+        <SectionHeader title="Model" />
+        <View style={styles.card}>
+          <SettingsInfoRow
+            icon={<IconCpu size={ICON_SIZE} color={colors.iconActive} />}
+            label="Model"
+            detail={MODEL_VERSION}
+          />
+          <SettingsInfoRow
+            icon={<IconStack2 size={ICON_SIZE} color={colors.iconActive} />}
+            label="Classes"
+            detail={String(CLASS_COUNT)}
+          />
+          <SettingsInfoRow
+            icon={<IconDeviceMobile size={ICON_SIZE} color={colors.iconActive} />}
+            label="Inference"
+            detail="On-device (offline)"
+            isLast
+          />
+        </View>
 
-        <View style={styles.row}>
-          <View style={styles.thresholdHeader}>
-            <Text style={styles.rowLabel}>Confidence threshold</Text>
-            <Text style={styles.rowDetail}>
-              {effectiveThreshold.toFixed(2)}
-              {confOverride == null ? ' (default)' : ''}
-            </Text>
-          </View>
-          <View style={styles.stepper}>
-            <Pressable style={styles.stepBtn} onPress={() => adjustThreshold(-THRESHOLD_STEP)}>
-              <Text style={styles.stepBtnText}>−</Text>
-            </Pressable>
-            <Pressable
-              style={styles.stepBtn}
-              onPress={() => setConfOverride(null)}
-              disabled={confOverride == null}>
-              <Text style={styles.stepBtnText}>Reset</Text>
-            </Pressable>
-            <Pressable style={styles.stepBtn} onPress={() => adjustThreshold(THRESHOLD_STEP)}>
-              <Text style={styles.stepBtnText}>+</Text>
-            </Pressable>
+        <SectionHeader title="Detection" />
+        <View style={styles.card}>
+          <SettingsInfoRow
+            icon={<IconLanguage size={ICON_SIZE} color={colors.iconActive} />}
+            label="Language"
+            detail={language}
+          />
+          <SettingsInfoRow
+            icon={<IconWifiOff size={ICON_SIZE} color={colors.iconActive} />}
+            label="Offline mode"
+            detail="Model and guide bundled locally"
+          />
+
+          <View style={[styles.row, styles.rowLast]}>
+            <View style={styles.iconWrap}>
+              <IconTargetArrow size={ICON_SIZE} color={colors.iconActive} />
+            </View>
+            <View style={styles.thresholdBody}>
+              <View style={styles.thresholdHeader}>
+                <Text style={styles.rowLabel}>Confidence threshold</Text>
+                <Text style={styles.thresholdValue}>
+                  {effectiveThreshold.toFixed(2)}
+                  {isDefaultThreshold ? (
+                    <Text style={styles.thresholdDefault}> · default</Text>
+                  ) : null}
+                </Text>
+              </View>
+              <View style={styles.stepper}>
+                <Pressable
+                  style={({ pressed }) => [styles.stepBtn, pressed && styles.stepBtnPressed]}
+                  onPress={() => adjustThreshold(-THRESHOLD_STEP)}
+                  hitSlop={6}>
+                  <IconMinus size={18} color={colors.textPrimary} strokeWidth={2.4} />
+                </Pressable>
+                <Pressable
+                  style={({ pressed }) => [styles.stepBtn, pressed && styles.stepBtnPressed]}
+                  onPress={() => adjustThreshold(THRESHOLD_STEP)}
+                  hitSlop={6}>
+                  <IconPlus size={18} color={colors.textPrimary} strokeWidth={2.4} />
+                </Pressable>
+                <Pressable
+                  style={({ pressed }) => [
+                    styles.resetBtn,
+                    pressed && styles.stepBtnPressed,
+                    isDefaultThreshold && styles.resetBtnDisabled,
+                  ]}
+                  onPress={() => setConfOverride(null)}
+                  disabled={isDefaultThreshold}
+                  hitSlop={6}>
+                  <Text
+                    style={[
+                      styles.resetBtnText,
+                      isDefaultThreshold && styles.resetBtnTextDisabled,
+                    ]}>
+                    Reset
+                  </Text>
+                </Pressable>
+              </View>
+            </View>
           </View>
         </View>
 
-        <SettingsInfoRow
-          label="Offline mode"
-          detail="Model and guide bundled locally"
-        />
+        <SectionHeader title="Data" />
+        <View style={styles.card}>
+          <Pressable
+            style={({ pressed }) => [styles.row, styles.rowLast, pressed && styles.rowPressed]}
+            onPress={handleClearHistory}>
+            <View style={[styles.iconWrap, styles.iconWrapDestructive]}>
+              <IconTrash size={ICON_SIZE} color="#DC2626" />
+            </View>
+            <View style={styles.rowBody}>
+              <Text style={styles.destructiveLabel}>Clear scan history</Text>
+              <Text style={styles.rowDetail}>
+                {historyCount === 0
+                  ? 'No saved scans'
+                  : `${historyCount} saved scan${historyCount === 1 ? '' : 's'}`}
+              </Text>
+            </View>
+          </Pressable>
+        </View>
 
-        <Pressable style={[styles.row, styles.destructiveRow]} onPress={handleClearHistory}>
-          <View style={styles.destructiveContent}>
-            <Text style={styles.destructiveLabel}>Clear scan history</Text>
-            <Text style={styles.rowDetail}>
-              {historyCount === 0
-                ? 'No saved scans'
-                : `${historyCount} saved scan${historyCount === 1 ? '' : 's'}`}
-            </Text>
-          </View>
-        </Pressable>
-      </View>
+        <Text style={styles.footer}>Smart Leaf · {MODEL_VERSION}</Text>
+      </ScrollView>
     </View>
   );
 }
 
+function SectionHeader({ title }: { title: string }) {
+  return <Text style={styles.sectionHeader}>{title}</Text>;
+}
+
 function SettingsInfoRow({
+  icon,
   label,
   detail,
   isLast,
 }: {
+  icon: ReactNode;
   label: string;
   detail: string;
   isLast?: boolean;
 }) {
   return (
-    <View style={[styles.row, styles.infoRow, isLast && styles.rowLast]}>
-      <Text style={styles.rowLabel}>{label}</Text>
-      <Text style={styles.rowDetail}>{detail}</Text>
+    <View style={[styles.row, isLast && styles.rowLast]}>
+      <View style={styles.iconWrap}>{icon}</View>
+      <View style={styles.rowBody}>
+        <Text style={styles.rowLabel}>{label}</Text>
+        <Text style={styles.rowDetail}>{detail}</Text>
+      </View>
     </View>
   );
 }
@@ -136,26 +220,57 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 12,
   },
-  listWrap: {
+  scrollContent: {
+    paddingHorizontal: 16,
+  },
+  sectionHeader: {
+    fontSize: 12,
+    fontWeight: '600',
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    color: colors.textSecondary,
+    marginTop: 20,
+    marginBottom: 8,
+    marginLeft: 8,
+  },
+  card: {
     backgroundColor: '#FFFFFF',
-    marginHorizontal: 16,
     borderRadius: 16,
     overflow: 'hidden',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 1,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    gap: 14,
     paddingHorizontal: 16,
     paddingVertical: 14,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#EDEFF1',
   },
   rowLast: {
     borderBottomWidth: 0,
   },
-  infoRow: {
-    alignItems: 'flex-start',
+  rowPressed: {
+    backgroundColor: '#F9FAFB',
+  },
+  iconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.activeIconBackground,
+  },
+  iconWrapDestructive: {
+    backgroundColor: 'rgba(220, 38, 38, 0.10)',
+  },
+  rowBody: {
+    flex: 1,
     gap: 2,
   },
   rowLabel: {
@@ -166,35 +281,66 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: colors.textSecondary,
   },
-  thresholdHeader: {
+  thresholdBody: {
     flex: 1,
+    gap: 12,
+  },
+  thresholdHeader: {
     gap: 2,
+  },
+  thresholdValue: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: colors.primaryDark,
+  },
+  thresholdDefault: {
+    fontWeight: '400',
+    color: colors.textSecondary,
   },
   stepper: {
     flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
   stepBtn: {
+    width: 40,
+    height: 36,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#F3F4F6',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
   },
-  stepBtnText: {
+  stepBtnPressed: {
+    backgroundColor: colors.activeIconBackground,
+  },
+  resetBtn: {
+    height: 36,
+    paddingHorizontal: 16,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F3F4F6',
+  },
+  resetBtnDisabled: {
+    opacity: 0.45,
+  },
+  resetBtnText: {
     fontSize: 14,
     fontWeight: '600',
     color: colors.textPrimary,
   },
-  destructiveRow: {
-    alignItems: 'flex-start',
-    borderBottomWidth: 0,
-  },
-  destructiveContent: {
-    gap: 2,
+  resetBtnTextDisabled: {
+    color: colors.textSecondary,
   },
   destructiveLabel: {
     fontSize: 16,
     fontWeight: '600',
     color: '#DC2626',
+  },
+  footer: {
+    textAlign: 'center',
+    fontSize: 12,
+    color: colors.textSecondary,
+    marginTop: 24,
   },
 });
