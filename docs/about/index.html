@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Smart Leaf</title>
+  <meta name="description" content="Learn about Smart Leaf, the offline plant disease identification app powered by on-device machine learning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="../index.html" class="logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M14 2C14 2 6 10 6 17C6 21.4 9.6 25 14 25C18.4 25 22 21.4 22 17C22 10 14 2 14 2Z" fill="#3DBB6E"/>
+        <path d="M14 6C14 6 10 12 10 16.5C10 18.9 11.8 20.8 14 20.8C16.2 20.8 18 18.9 18 16.5C18 12 14 6 14 6Z" fill="#2A9D55"/>
+      </svg>
+      Smart Leaf
+    </a>
+    <nav class="header-nav">
+      <a href="../index.html" class="nav-link-home">Home</a>
+      <a href="../privacy-policy/">Privacy Policy</a>
+      <a href="../get-app/" class="btn-cta">Get the app</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>About Smart Leaf</h1>
+    <p class="hero-subtitle">An offline plant disease identification app for gardeners, farmers, and plant enthusiasts.</p>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>&rsaquo;</span>
+      <span>About</span>
+    </nav>
+  </div>
+
+  <div class="layout layout-no-toc">
+
+    <aside class="sidebar-left" aria-label="Site navigation">
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">Legal</div>
+        <a href="../privacy-policy/" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Privacy Policy
+        </a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">App</div>
+        <a href="../about/" class="sidebar-link active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          About Smart Leaf
+        </a>
+        <a href="../support/" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          Support
+        </a>
+        <a href="../get-app/" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Get the app
+        </a>
+      </div>
+    </aside>
+
+    <main class="content">
+
+      <div class="disclaimer">
+        <strong>Important:</strong> Smart Leaf provides informational plant disease guidance only. It is not a substitute for professional agricultural or plant pathology advice.
+      </div>
+
+      <p class="intro">
+        Smart Leaf is a mobile app that helps you identify plant leaf diseases using artificial intelligence running entirely on your device. No account required, no cloud uploads — just point, scan, and learn.
+      </p>
+
+      <section id="what-it-does">
+        <h2>What it does</h2>
+        <p>
+          Smart Leaf analyzes photos of plant leaves to predict possible diseases. Use your phone's camera for a live scan, or pick an image from your gallery. The app returns a diagnosis with a confidence score and links to a detailed disease guide covering symptoms, treatment, and prevention.
+        </p>
+        <p>
+          A built-in library lets you browse common diseases across crops like tomato, corn, apple, grape, and more — even when you're offline.
+        </p>
+      </section>
+
+      <section id="how-it-works">
+        <h2>How it works</h2>
+        <p>
+          Smart Leaf ships with a TensorFlow Lite model (<strong>smartleaf_fp16</strong>) bundled inside the app. When you scan a leaf, the image is preprocessed and run through the model on your phone's processor. Results appear in seconds without any network connection.
+        </p>
+        <p>
+          You can adjust the confidence threshold in Settings to control how strict the app is before reporting a match.
+        </p>
+      </section>
+
+      <section id="privacy-first">
+        <h2>Privacy first</h2>
+        <p>
+          Your scan photos and history are stored locally on your device. We don't operate a backend server and don't collect personal data. Read our full <a href="../privacy-policy/">Privacy Policy</a> for details.
+        </p>
+      </section>
+
+      <section id="version">
+        <h2>App info</h2>
+        <ul>
+          <li><strong>Version:</strong> 1.0.0</li>
+          <li><strong>Platform:</strong> Android</li>
+          <li><strong>Package:</strong> com.yasinwalum.smartleaf</li>
+          <li><strong>Model:</strong> smartleaf_fp16 (on-device)</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Smart Leaf. All rights reserved.</p>
+    <p style="margin-top: 12px;">
+      <a href="../index.html">Home</a>
+      <a href="../support/">Support</a>
+      <a href="../privacy-policy/">Privacy Policy</a>
+    </p>
+  </footer>
+
+</body>
+</html>
