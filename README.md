@@ -42,32 +42,15 @@
 
 ## Screenshots
 
-> 📸 _Placeholders — drop your real screenshots into `docs/screenshots/` (or `assets/screenshots/`) and they'll render here._
-
 <p align="center">
-  <img src="docs/screenshots/home.png" alt="Home screen" width="24%">
-  <img src="docs/screenshots/scan.png" alt="Camera scan" width="24%">
-  <img src="docs/screenshots/result.png" alt="Diagnosis result" width="24%">
-  <img src="docs/screenshots/library.png" alt="Disease library" width="24%">
-</p>
-
-<p align="center">
-  <img src="docs/screenshots/library-detail.png" alt="Disease detail" width="24%">
-  <img src="docs/screenshots/history.png" alt="Scan history" width="24%">
-  <img src="docs/screenshots/not-a-leaf.png" alt="Not-a-leaf rejection" width="24%">
-  <img src="docs/screenshots/settings.png" alt="Settings" width="24%">
+  <img src="docs/screenshots/home.jpeg" alt="Home screen — disease library, scan CTA, and history" width="45%">
+  <img src="docs/screenshots/details.jpeg" alt="Scan result — Northern Leaf Blight diagnosis with confidence scores" width="45%">
 </p>
 
 | Screen | File |
 |---|---|
-| Home | `docs/screenshots/home.png` |
-| Camera scan | `docs/screenshots/scan.png` |
-| Diagnosis result | `docs/screenshots/result.png` |
-| Disease library | `docs/screenshots/library.png` |
-| Disease detail | `docs/screenshots/library-detail.png` |
-| Scan history | `docs/screenshots/history.png` |
-| "Not a leaf" rejection | `docs/screenshots/not-a-leaf.png` |
-| Settings | `docs/screenshots/settings.png` |
+| Home | `docs/screenshots/home.jpeg` |
+| Scan result | `docs/screenshots/details.jpeg` |
 
 ## How it works
 
